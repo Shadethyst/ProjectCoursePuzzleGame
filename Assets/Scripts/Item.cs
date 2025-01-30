@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public void placeItem(Vector2 pos)
+    {
+        Instantiate(this, pos, Quaternion.identity);
+    }
     // Start is called before the first frame update
     void Start()
     {
