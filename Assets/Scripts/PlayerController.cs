@@ -9,16 +9,13 @@ using UnityEngine.Tilemaps;
 
 
 
-/*
- *  PlayerController 
- *  - Core Idea:
- *  1) The player collides with the current tile
- *  2) The current tile's data will be saved to currentTile
- *  3) When the player is ready to move, they can use arrows or WASD
- *  4) The position of the next tile will be calculated based on the distance from currentTile
- *  5) The player will automatically move to the direction of the input (one direction at a time)
- *  6) When the player has stopped, there will be a short cooldown moment
- *  7) The process restarts from the step 1
+/* PlayerController
+ * 
+ * - Updated from the previous version
+ * - Idea so far:
+ * --> Checks the currently Occupied Tile using GridManager
+ * --> When it is the player's turn, they can try moving
+ * --> If the next tile (calculated by the distance of Occupied Tile) is walkable, the walking will happen
  */
 public class PlayerController : MonoBehaviour
 {
@@ -29,79 +26,96 @@ public class PlayerController : MonoBehaviour
     private InputAction moveUp;
     private InputAction moveDown;
 
-    private Vector2 currentPosition;
-    private Vector2 nextPosition;
+    private GridManager gridManager;
+    private GameManager gameManager;
+    private Unit unit;
+    private GameState currentGameState;
 
-    private bool goingLeft;
-    private bool goingRight;
-    private bool goingUp;
-    private bool goingDown;
+    private Tile occupiedTile;
+    private Tile nextTile;
 
-    private bool readyToMove;
-
-    private GameManager gameManager; // Coming Soon
-    private Tile currentTile;
-    private Vector2 nextTilePosition; // Coming Soon
-
+    private bool inputGiven;
+    private float distance = 1.0f;
+    private float speed = 2.0f;
+    
 
     private void Awake()
     {
-        
-        gameManager = GetComponent<GameManager>();
-        playerInput = GetComponent<PlayerInput>();
-        player = this.gameObject.transform;
-        moveLeft = playerInput.actions.FindAction("MoveLeft");
-        moveRight = playerInput.actions.FindAction("MoveRight");
-        moveUp = playerInput.actions.FindAction("MoveUp");
-        moveDown = playerInput.actions.FindAction("MoveDown");
+        try
+        {
+            gameManager = GameObject.Find("MapManager").GetComponent<GameManager>();
+            gridManager = GameObject.Find("MapManager").GetComponent<GridManager>();
+            unit = this.GetComponent<Unit>();
+            occupiedTile = unit.occupiedTile;
+            nextTile = null;
+            playerInput = GetComponent<PlayerInput>();
+            player = this.gameObject.transform;
+            moveLeft = playerInput.actions.FindAction("MoveLeft");
+            moveRight = playerInput.actions.FindAction("MoveRight");
+            moveUp = playerInput.actions.FindAction("MoveUp");
+            moveDown = playerInput.actions.FindAction("MoveDown");
+        } 
+        catch
+        {
+            Debug.Log("Initialization not completed");
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        ResetPlayerPosition(7.0f, player.position.y);
-        readyToMove = true;
+        inputGiven = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (moveLeft.IsPressed() && readyToMove)
-        {
-            readyToMove = false;
-            goingLeft = true;
-            readyToMove = false;
-            nextPosition = new Vector2(currentTile.transform.position.x - 1.0f, currentTile.transform.position.y);
-        }
-        else if (moveRight.IsPressed() && readyToMove)
-        {
-            readyToMove = false;
-            goingRight = true;
-            nextPosition = new Vector2(currentTile.transform.position.x + 1.0f, currentTile.transform.position.y);
-        }
-        else if (moveUp.IsPressed() && readyToMove)
-        {
-            readyToMove = false;
-            goingUp = true;
-            nextPosition = new Vector2(currentTile.transform.position.x, currentTile.transform.position.y + 1.0f);
-        }
-        else if (moveDown.IsPressed() && readyToMove)
-        {
-            readyToMove = false;
-            goingDown = true;
-            nextPosition = new Vector2(currentTile.transform.position.x, currentTile.transform.position.y - 1.0f);
-        }
+        currentGameState = gameManager.state;
+        occupiedTile = CheckCurrentPosition();
 
-
-        if (goingLeft || goingRight || goingUp || goingDown)
+        if (currentGameState == GameState.WaitForInput)
         {
-            player.position = Vector2.MoveTowards(player.position, nextPosition, 2.0f * Time.deltaTime);
-
-            if (player.position.x == nextPosition.x && player.position.y == nextPosition.y)
+            if (moveLeft.IsPressed() && !inputGiven)
             {
-                ResetMovements();
-                StartCoroutine(RechargeMovement(0.001f));
+                nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x - distance, occupiedTile.transform.position.y));
+                inputGiven = true;
             }
+            else if (moveRight.IsPressed() && !inputGiven)
+            {
+                nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x + distance, occupiedTile.transform.position.y));
+                inputGiven = true;
+            }
+            else if (moveUp.IsPressed() && !inputGiven)
+            {
+                nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y + distance));
+                inputGiven = true;
+            }
+            else if (moveDown.IsPressed() && !inputGiven)
+            {
+                nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y - distance));
+                inputGiven = true;
+            }
+        }
+        if (nextTile && nextTile.Walkable && inputGiven)
+        {
+            gameManager.UpdateGameState(GameState.Turn);
+
+            if (currentGameState == GameState.Turn)
+            {
+                player.position = Vector2.MoveTowards(player.position, nextTile.transform.position, speed * Time.deltaTime);
+                if (player.position == nextTile.transform.position)
+                {
+                    occupiedTile = nextTile;
+                    unit.SetOccupiedTile(occupiedTile);
+                    nextTile = null;
+                    gameManager.UpdateGameState(GameState.WaitForInput);
+                }
+            }
+        }
+        else
+        {
+            inputGiven = false;
+            nextTile = null;
         }
     }
 
@@ -110,26 +124,14 @@ public class PlayerController : MonoBehaviour
         player.position = new Vector2(x,y);
     }
 
-    public void ResetMovements()
+    public Tile CheckCurrentPosition()
     {
-        goingLeft = false;
-        goingRight = false;
-        goingUp = false;
-        goingDown = false;
-    }
-
-    private IEnumerator RechargeMovement(float rechargeTime)
-    {
-        yield return new WaitForSeconds(rechargeTime);
-        readyToMove = true;
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.transform.position == player.position)
+        if (!occupiedTile)
         {
-            currentTile = collision.GetComponentInParent<Tile>();
-            currentPosition = currentTile.transform.position;
+            occupiedTile = gridManager.getTileAtPos(player.position);
+            unit.SetOccupiedTile(occupiedTile);
         }
+        
+        return unit.GetOccupiedTile();
     }
 }
