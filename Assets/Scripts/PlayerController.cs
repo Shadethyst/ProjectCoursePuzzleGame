@@ -21,7 +21,9 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
     private PlayerInput playerInput;
+    private Animator playerAnimator;
     private Transform player;
+    private SpriteRenderer playerRenderer;
     private InputAction moveLeft;
     private InputAction moveRight;
     private InputAction moveUp;
@@ -53,7 +55,9 @@ public class PlayerController : MonoBehaviour
             occupiedTile = unit.occupiedTile;
             nextTile = null;
             playerInput = GetComponent<PlayerInput>();
+            playerAnimator = this.GetComponent<Animator>();
             player = this.gameObject.transform;
+            playerRenderer = player.GetComponent<SpriteRenderer>();
             moveLeft = playerInput.actions.FindAction("MoveLeft");
             moveRight = playerInput.actions.FindAction("MoveRight");
             moveUp = playerInput.actions.FindAction("MoveUp");
@@ -85,11 +89,13 @@ public class PlayerController : MonoBehaviour
             {
                 nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x - distance, occupiedTile.transform.position.y));
                 inputGiven = true;
+                playerRenderer.flipX = false;
             }
             else if (moveRight.IsPressed() && !inputGiven)
             {
                 nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x + distance, occupiedTile.transform.position.y));
                 inputGiven = true;
+                playerRenderer.flipX = true;
             }
             else if (moveUp.IsPressed() && !inputGiven)
             {
@@ -122,9 +128,11 @@ public class PlayerController : MonoBehaviour
             if (currentGameState == GameState.Turn)
             {
                 setAdjacencies(false);
+                playerAnimator.SetBool("isWalking", true);
                 player.position = Vector2.MoveTowards(player.position, nextTile.transform.position, speed * Time.deltaTime);
                 if (player.position == nextTile.transform.position)
                 {
+                    playerAnimator.SetBool("isWalking", false);
                     occupiedTile = nextTile;
                     unit.SetOccupiedTile(occupiedTile);
                     setAdjacencies(true);
