@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    [SerializeField] protected int range;
     public void placeItem(Vector2 pos)
     {
         Instantiate(this, pos, Quaternion.identity);
+    }
+    private void Awake()
+    {
+
     }
     // Start is called before the first frame update
     void Start()
@@ -19,4 +24,6 @@ public class Item : MonoBehaviour
     {
         
     }
+    public int getRange() {  return range; }
+    public void setRange(int range) {  this.range = range; }
 }

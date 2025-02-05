@@ -12,7 +12,7 @@ public class GridManager : MonoBehaviour
     protected int variant;
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Transform _camera;
-    [SerializeField] private Unit _playerPrefab;
+    [SerializeField] private PlayerController _playerPrefab;
     private GameObject player;
     public Tile getTileAtPos(Vector2 pos)
     {
@@ -47,10 +47,11 @@ public class GridManager : MonoBehaviour
                 //spawning player on a tile, player knows which tile it's on and tiles know what they have on them
                 var spawnpoint = new Vector2(_width / 2, 4);
                 var spawntile = GridManager.instance.getTileAtPos(spawnpoint);
-                var spawnedPlayer = Instantiate(_playerPrefab, spawntile.transform.position, Quaternion.identity);
+                PlayerController spawnedPlayer = Instantiate(_playerPrefab, spawntile.transform.position, Quaternion.identity);
                 spawnedPlayer.name = $"pelaaja";
                 spawntile.occupiedUnit = spawnedPlayer;
-                spawnedPlayer.occupiedTile = spawntile;
+                spawnedPlayer.setOccupiedTile(spawntile);
+                spawnedPlayer.setAdjacencies(true);
                 break;
 
 

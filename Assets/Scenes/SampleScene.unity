@@ -248,7 +248,7 @@ MonoBehaviour:
   _width: 16
   _tilePrefab: {fileID: 7841447428200730827, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
   _camera: {fileID: 519420032}
-  _playerPrefab: {fileID: -8911653786418350011, guid: 99fda064dc4177c48b4212b593d16e53, type: 3}
+  _playerPrefab: {fileID: 8611877224272979886, guid: 99fda064dc4177c48b4212b593d16e53, type: 3}
 --- !u!4 &884795192
 Transform:
   m_ObjectHideFlags: 0

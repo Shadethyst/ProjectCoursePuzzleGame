@@ -185,6 +185,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1936578690349590223}
   _highlight: {fileID: 1367164037087306056}
+  _isWalkable: 0
+  _isPlacable: 0
+  _isAdjacent: 0
+  _adjacentMaterial: {fileID: 2100000, guid: b07679b78b6b74b47919e38b78e1fbbe, type: 2}
+  _nonAdjacentMaterial: {fileID: 2100000, guid: 54dc18a1477d76f4197f2326e060f8c5, type: 2}
+  occupiedUnit: {fileID: 0}
+  blockingItem: {fileID: 0}
 --- !u!61 &8706690563705943995
 BoxCollider2D:
   m_ObjectHideFlags: 0
