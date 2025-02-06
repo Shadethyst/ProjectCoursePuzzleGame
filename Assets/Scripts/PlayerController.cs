@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.UpdateGameState(GameState.Turn);
 
-            if (currentGameState == GameState.Turn)
+            if (GameManager.Instance.state == GameState.Turn)
             {
                 player.position = Vector2.MoveTowards(player.position, nextTile.transform.position, speed * Time.deltaTime);
                 if (player.position == nextTile.transform.position)
@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour
             inputGiven = false;
             nextTile = null;
         }
+
     }
 
     public void ResetPlayerPosition(float x, float y)

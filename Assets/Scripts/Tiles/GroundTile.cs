@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class GroundTile : Tile
 {
+    private void Awake()
+    {
+        _isWalkable = true;
+        _isPlacable = true;
+    }
 
 }
