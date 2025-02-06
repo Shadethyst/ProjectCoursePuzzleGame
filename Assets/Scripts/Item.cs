@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
     [SerializeField] protected int range;
     public void placeItem(Vector2 pos)
@@ -26,4 +26,5 @@ public class Item : MonoBehaviour
     }
     public int getRange() {  return range; }
     public void setRange(int range) {  this.range = range; }
+    public abstract void interact(Item interaction);
 }

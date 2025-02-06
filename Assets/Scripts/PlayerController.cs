@@ -121,13 +121,11 @@ public class PlayerController : MonoBehaviour
 
             if (currentGameState == GameState.Turn)
             {
-                setAdjacencies(false);
                 player.position = Vector2.MoveTowards(player.position, nextTile.transform.position, speed * Time.deltaTime);
                 if (player.position == nextTile.transform.position)
                 {
                     occupiedTile = nextTile;
                     unit.SetOccupiedTile(occupiedTile);
-                    setAdjacencies(true);
                     nextTile = null;
                     gameManager.UpdateGameState(GameState.WaitForInput);
                 }
@@ -181,6 +179,10 @@ public class PlayerController : MonoBehaviour
     public void setOccupiedTile(Tile tile)
     {
         occupiedTile = tile;
+    }
+    public Item getChosenItem()
+    {
+        return chosenItem;
     }
     public Tile getHoveredTile() { return hoveredTile; }
     public void setHoveredTile(Tile tile) {  hoveredTile = tile; }

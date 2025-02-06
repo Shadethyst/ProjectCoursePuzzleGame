@@ -18,4 +18,8 @@ public class Element : Item
     {
         
     }
+    public override void interact(Item interaction)
+    {
+
+    }
 }

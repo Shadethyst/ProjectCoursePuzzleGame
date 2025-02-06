@@ -13,6 +13,7 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] protected Material _nonAdjacentMaterial;
     public PlayerController occupiedUnit;
     public Item blockingItem;
+    private Item[] items;
     protected Vector2 Coords;
     public bool Placable => _isPlacable && blockingItem == null;
     public bool Walkable => _isWalkable && blockingItem == null;
@@ -22,7 +23,9 @@ public abstract class Tile : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if (_isAdjacent)
+        PlayerController.instance.setHoveredTile(this);
+        if (((PlayerController.instance.getOccupiedTile().getCoords().x == this.getCoords().x && System.Math.Abs(this.getCoords().y - PlayerController.instance.getOccupiedTile().getCoords().y) <= PlayerController.instance.getChosenItem().getRange())
+                || (PlayerController.instance.getOccupiedTile().getCoords().y == this.getCoords().y && System.Math.Abs(this.getCoords().x - PlayerController.instance.getOccupiedTile().getCoords().x) <= PlayerController.instance.getChosenItem().getRange())))
         {
             _highlight.GetComponent<SpriteRenderer>().color = Color.green;
         }
@@ -31,7 +34,7 @@ public abstract class Tile : MonoBehaviour
             _highlight.GetComponent<SpriteRenderer>().color = Color.white;
         }
         _highlight.SetActive(true);
-        PlayerController.instance.setHoveredTile(this);
+        
 
     }
     private void OnMouseExit() {
