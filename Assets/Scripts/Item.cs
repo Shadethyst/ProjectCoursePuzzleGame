@@ -26,5 +26,8 @@ public abstract class Item : MonoBehaviour
     }
     public int getRange() {  return range; }
     public void setRange(int range) {  this.range = range; }
-    public abstract void interact(Item interaction);
+    public virtual void interact(Item interaction)
+    {
+
+    }
 }

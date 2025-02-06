@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +16,12 @@ public abstract class Tile : MonoBehaviour
     public Item blockingItem;
     private Item[] items;
     protected Vector2 Coords;
+    
     public bool Placable => _isPlacable && blockingItem == null;
     public bool Walkable => _isWalkable && blockingItem == null;
     public virtual void Init(int x, int y)
     {
+        items = new Item[10];
         Coords = new Vector2(x, y);
     }
     private void OnMouseEnter()
@@ -41,6 +44,38 @@ public abstract class Tile : MonoBehaviour
     }
     private void OnMouseExit() {
         _highlight.SetActive(false);
+    }
+    private void OnEnable()
+    {
+        GameManager.OnGameStateChanged += OnOnGameStateChanged;
+    }
+    private void OnDisable()
+    {
+        GameManager.OnGameStateChanged -= OnOnGameStateChanged;
+    }
+    private void OnOnGameStateChanged(GameState state)
+    {
+        if(state == GameState.Turn)
+        {
+            checkInteraction();
+        }
+    }
+
+
+
+    private void checkInteraction()
+    {
+        foreach (Item interacting in items)
+        {
+            foreach (Item interacted in items)
+            {
+                if (interacting != null && interacted != null && !interacting.Equals(interacted))
+                {
+                    interacting.interact(interacted);
+                }
+            }
+
+        }
     }
     // Start is called before the first frame update
     void Start()

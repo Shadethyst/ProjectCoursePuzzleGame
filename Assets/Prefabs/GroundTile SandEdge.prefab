@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1936578690349590223, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d03b15f54b8f38845ac81222f2b8f686, type: 3}
+      objectReference: {fileID: 21300000, guid: d17659c31e51f4b22b7c505f689e3cec, type: 3}
     - target: {fileID: 1936578690349590223, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -66,7 +66,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3962048713745714827, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_Name
-      value: GroundTile Grass
+      value: GroundTile SandEdge
+      objectReference: {fileID: 0}
+    - target: {fileID: 8706690563705943995, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8706690563705943995, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
