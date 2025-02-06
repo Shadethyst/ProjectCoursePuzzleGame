@@ -8,9 +8,11 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager instance;
     [SerializeField] private int _height, _width;
-    private Dictionary<Vector2, Tile> tiles;
+    [SerializeField] private Dictionary<Vector2, Tile> tiles;
     protected int variant;
     [SerializeField] private Tile _tilePrefab;
+    [SerializeField] private Tile _tilePrefab2;
+    [SerializeField] private Tile _tilePrefab3;
     [SerializeField] private Transform _camera;
     [SerializeField] private PlayerController _playerPrefab;
     private GameObject player;
@@ -38,10 +40,28 @@ public class GridManager : MonoBehaviour
                 {
                     for (int y = 0; y < _height; y++)
                     {
-                        var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
-                        spawnedTile.name = $"Tile {x} {y}";
-                        spawnedTile.Init(x, y);
-                        tiles[new Vector2(x, y)] = spawnedTile;
+                        if(x == 3)
+                        {
+                            var spawnedTile = Instantiate(_tilePrefab2, new Vector3(x, y), Quaternion.identity);
+                            spawnedTile.name = $"Tile {x} {y}";
+                            spawnedTile.Init(x, y);
+                            tiles[new Vector2(x, y)] = spawnedTile;
+                        }
+                        else if(y == 3)
+                        {
+                            var spawnedTile = Instantiate(_tilePrefab3, new Vector3(x, y), Quaternion.identity);
+                            spawnedTile.name = $"Tile {x} {y}";
+                            spawnedTile.Init(x, y);
+                            tiles[new Vector2(x, y)] = spawnedTile;
+                        }
+                        else
+                        {
+                            var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
+                            spawnedTile.name = $"Tile {x} {y}";
+                            spawnedTile.Init(x, y);
+                            tiles[new Vector2(x, y)] = spawnedTile;
+                        }
+
                     }
                 }
                 //spawning player on a tile, player knows which tile it's on and tiles know what they have on them

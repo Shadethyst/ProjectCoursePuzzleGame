@@ -125,9 +125,8 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.UpdateGameState(GameState.Turn);
 
-            if (currentGameState == GameState.Turn)
+            if (GameManager.Instance.state == GameState.Turn)
             {
-                setAdjacencies(false);
                 playerAnimator.SetBool("isWalking", true);
                 player.position = Vector2.MoveTowards(player.position, nextTile.transform.position, speed * Time.deltaTime);
                 if (player.position == nextTile.transform.position)
@@ -135,7 +134,6 @@ public class PlayerController : MonoBehaviour
                     playerAnimator.SetBool("isWalking", false);
                     occupiedTile = nextTile;
                     unit.SetOccupiedTile(occupiedTile);
-                    setAdjacencies(true);
                     nextTile = null;
                     gameManager.UpdateGameState(GameState.WaitForInput);
                 }
@@ -146,6 +144,7 @@ public class PlayerController : MonoBehaviour
             inputGiven = false;
             nextTile = null;
         }
+
     }
 
     public void ResetPlayerPosition(float x, float y)
@@ -189,6 +188,10 @@ public class PlayerController : MonoBehaviour
     public void setOccupiedTile(Tile tile)
     {
         occupiedTile = tile;
+    }
+    public Item getChosenItem()
+    {
+        return chosenItem;
     }
     public Tile getHoveredTile() { return hoveredTile; }
     public void setHoveredTile(Tile tile) {  hoveredTile = tile; }
