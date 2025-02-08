@@ -71,7 +71,6 @@ public class GridManager : MonoBehaviour
                 spawnedPlayer.name = $"pelaaja";
                 spawntile.occupiedUnit = spawnedPlayer;
                 spawnedPlayer.setOccupiedTile(spawntile);
-                spawnedPlayer.setAdjacencies(true);
                 break;
 
 

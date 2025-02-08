@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     {
         UpdateGameState(GameState.GenerateLevel);
     }
+    private IEnumerator minTurnDuration()
+    {
+        yield return new WaitForSeconds(2);
+    }
 
     /*
      *updates game state
@@ -40,21 +44,31 @@ public class GameManager : MonoBehaviour
             case GameState.WaitForInput:
                 break;
             case GameState.Turn:
+                UpdateGameState(GameState.WaitForInput);
                 break;
             case GameState.LevelComplete:
                 break;
             case GameState.Defeat:
                 break;
+            case GameState.Movement:
+                PlayerController.instance.movePlayer();
+                break;
+            case GameState.Placement:
+                PlayerController.instance.placeSelected();
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
         OnGameStateChanged?.Invoke(newState);
+        Debug.Log(newState);
     }
-}
+} 
 public enum GameState
 {
     GenerateLevel,
     WaitForInput,
+    Movement,
+    Placement,
     Turn,
     LevelComplete,
     Defeat
