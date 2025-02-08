@@ -24,7 +24,7 @@ public abstract class Tile : MonoBehaviour
         items = new Item[10];
         Coords = new Vector2(x, y);
     }
-    private void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         PlayerController.instance.setHoveredTile(this);
 
@@ -42,7 +42,7 @@ public abstract class Tile : MonoBehaviour
         
 
     }
-    private void OnMouseExit() {
+    protected virtual void OnMouseExit() {
         _highlight.SetActive(false);
     }
     private void OnEnable()
@@ -53,9 +53,9 @@ public abstract class Tile : MonoBehaviour
     {
         GameManager.OnGameStateChanged -= OnOnGameStateChanged;
     }
-    private void OnOnGameStateChanged(GameState state)
+    protected virtual void OnOnGameStateChanged(GameState state)
     {
-        if(state == GameState.Turn)
+        if (state == GameState.Turn)
         {
             checkInteraction();
         }
@@ -63,15 +63,18 @@ public abstract class Tile : MonoBehaviour
 
 
 
-    private void checkInteraction()
+    protected virtual void checkInteraction()
     {
         foreach (Item interacting in items)
         {
-            foreach (Item interacted in items)
+            if (interacting)
             {
-                if (interacting != null && interacted != null && !interacting.Equals(interacted))
+                foreach (Item interacted in items)
                 {
-                    interacting.interact(interacted);
+                    if (interacting != null && interacted != null && !interacting.Equals(interacted))
+                    {
+                        interacting.interact(interacted);
+                    }
                 }
             }
 

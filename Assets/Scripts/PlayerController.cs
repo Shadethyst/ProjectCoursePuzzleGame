@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private Transform player;
     private SpriteRenderer playerRenderer;
+
     private InputAction moveLeft;
     private InputAction moveRight;
     private InputAction moveUp;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private GridManager gridManager;
     private GameManager gameManager;
-    private Unit unit;
+    private PlayerController unit;
     private GameState currentGameState;
     [SerializeField] protected Item chosenItem;
 
@@ -51,8 +52,6 @@ public class PlayerController : MonoBehaviour
         {
             gameManager = GameObject.Find("MapManager").GetComponent<GameManager>();
             gridManager = GameObject.Find("MapManager").GetComponent<GridManager>();
-            unit = this.GetComponent<Unit>();
-            occupiedTile = unit.occupiedTile;
             nextTile = null;
             playerInput = GetComponent<PlayerInput>();
             playerAnimator = this.GetComponent<Animator>();
@@ -71,104 +70,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     // Start is called before the first frame update
     void Start()
     {
-        inputGiven = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentGameState = gameManager.state;
-        occupiedTile = CheckCurrentPosition();
-
-        if (currentGameState == GameState.WaitForInput)
+        if(GameManager.Instance.state == GameState.Movement)
         {
-            if (moveLeft.IsPressed() && !inputGiven)
+            if (inputGiven)
             {
-                nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x - distance, occupiedTile.transform.position.y));
-                inputGiven = true;
-                playerRenderer.flipX = false;
-            }
-            else if (moveRight.IsPressed() && !inputGiven)
-            {
-                nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x + distance, occupiedTile.transform.position.y));
-                inputGiven = true;
-                playerRenderer.flipX = true;
-            }
-            else if (moveUp.IsPressed() && !inputGiven)
-            {
-                nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y + distance));
-                inputGiven = true;
-            }
-            else if (moveDown.IsPressed() && !inputGiven)
-            {
-                nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y - distance));
-                inputGiven = true;
-            }
-            /**
-            * tries to add an element to the clicked tile,
-            * checks that the direction pressed is a cardinal direction and
-            * checks the whether the cardinal direction is in range defined in the item being placed by comparing hoveredTile and occupiedTile objects coordinates
-            *
-             */
-            if (interact.IsPressed() && 
-                ((occupiedTile.getCoords().x == hoveredTile.getCoords().x && System.Math.Abs(hoveredTile.getCoords().y - occupiedTile.getCoords().y) <= chosenItem.getRange())
-                || (occupiedTile.getCoords().y == hoveredTile.getCoords().y && System.Math.Abs(hoveredTile.getCoords().x - occupiedTile.getCoords().x) <= chosenItem.getRange()))
-                )
-            {
-                chosenItem.placeItem(hoveredTile.getCoords());
-            }
-        }
-        if (nextTile && nextTile.Walkable && inputGiven)
-        {
-            gameManager.UpdateGameState(GameState.Turn);
-
-            if (GameManager.Instance.state == GameState.Turn)
-            {
-                playerAnimator.SetBool("isWalking", true);
                 player.position = Vector2.MoveTowards(player.position, nextTile.transform.position, speed * Time.deltaTime);
-                if (player.position == nextTile.transform.position)
-                {
-                    playerAnimator.SetBool("isWalking", false);
-                    occupiedTile = nextTile;
-                    unit.SetOccupiedTile(occupiedTile);
-                    nextTile = null;
-                    gameManager.UpdateGameState(GameState.WaitForInput);
-                }
+            }
+            if (player.position == nextTile.transform.position)
+            {
+                playerAnimator.SetBool("isWalking", false);
+                occupiedTile = nextTile;
+                setOccupiedTile(occupiedTile);
+                nextTile = null;
+                gameManager.UpdateGameState(GameState.Turn);
             }
         }
-        else
-        {
-            inputGiven = false;
-            nextTile = null;
-        }
+
 
     }
-
     public void ResetPlayerPosition(float x, float y)
     {
         player.position = new Vector2(x,y);
-    }
-    public void setAdjacencies(bool adjacency)
-    {
-        if (GridManager.instance.getTileAtPos(new Vector2(occupiedTile.getCoords().x + 1, occupiedTile.getCoords().y)) != null)
-        {
-            GridManager.instance.getTileAtPos(new Vector2(occupiedTile.getCoords().x + 1, occupiedTile.getCoords().y)).setAdjacent(adjacency);
-        }
-        if (GridManager.instance.getTileAtPos(new Vector2(occupiedTile.getCoords().x - 1, occupiedTile.getCoords().y)) != null)
-        {
-            GridManager.instance.getTileAtPos(new Vector2(occupiedTile.getCoords().x -1, occupiedTile.getCoords().y)).setAdjacent(adjacency);
-        }
-        if (GridManager.instance.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + 1)) != null)
-        {
-            GridManager.instance.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + 1)).setAdjacent(adjacency);
-        }
-        if (GridManager.instance.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - 1)) != null)
-        {
-            GridManager.instance.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - 1)).setAdjacent(adjacency);
-        }
     }
 
     public Tile CheckCurrentPosition()
@@ -176,10 +107,10 @@ public class PlayerController : MonoBehaviour
         if (!occupiedTile)
         {
             occupiedTile = gridManager.getTileAtPos(player.position);
-            unit.SetOccupiedTile(occupiedTile);
+            unit.setOccupiedTile(occupiedTile);
         }
         
-        return unit.GetOccupiedTile();
+        return instance.getOccupiedTile();
     }
     public Tile getOccupiedTile()
     {
@@ -193,6 +124,67 @@ public class PlayerController : MonoBehaviour
     {
         return chosenItem;
     }
+
+    /**
+    * tries to add an element to the clicked tile,
+    * checks that the direction pressed is a cardinal direction and
+    * checks the whether the cardinal direction is in range defined in the item being placed by comparing hoveredTile and occupiedTile objects coordinates
+    *
+    */
+    public void handlePlacement(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("trying to place item");
+            if(occupiedTile && GameManager.Instance.state == GameState.WaitForInput &&
+                ((occupiedTile.getCoords().x == hoveredTile.getCoords().x && System.Math.Abs(hoveredTile.getCoords().y - occupiedTile.getCoords().y) <= chosenItem.getRange())
+                || (occupiedTile.getCoords().y == hoveredTile.getCoords().y && System.Math.Abs(hoveredTile.getCoords().x - occupiedTile.getCoords().x) <= chosenItem.getRange())))
+            {
+                gameManager.UpdateGameState(GameState.Placement);
+            }
+        }
+    }
+    public void handleMovement(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(GameManager.Instance.state == GameState.WaitForInput)
+            {
+                if (context.action.id == moveLeft.id)
+                {
+                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x - distance, occupiedTile.transform.position.y));
+                    playerRenderer.flipX = false;
+                }
+                else if (context.action.id == moveRight.id)
+                {
+                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x + distance, occupiedTile.transform.position.y));
+                    playerRenderer.flipX = true;
+                }
+                else if (context.action.id == moveDown.id)
+                {
+                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y - distance));
+                }
+                else if (context.action.id == moveUp.id)
+                {
+                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y + distance));
+                }
+                GameManager.Instance.UpdateGameState(GameState.Movement);
+                playerAnimator.SetBool("isWalking", true);
+            }
+
+        }
+
+    }
+    public void movePlayer()
+    {
+        inputGiven = true;
+    }
+    public void placeSelected()
+    {
+        chosenItem.placeItem(hoveredTile.getCoords());
+        gameManager.UpdateGameState(GameState.Turn);
+    }
     public Tile getHoveredTile() { return hoveredTile; }
     public void setHoveredTile(Tile tile) {  hoveredTile = tile; }
+
 }
