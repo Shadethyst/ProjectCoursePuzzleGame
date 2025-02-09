@@ -9,13 +9,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1936578690349590223, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936578690349590223, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_FlipY
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1936578690349590223, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d7629da5771684811b24b6a78ea45312, type: 3}
+      objectReference: {fileID: 21300000, guid: 003be6dcb8496a24f966a8964bec5db6, type: 3}
     - target: {fileID: 1936578690349590223, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -74,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3962048713745714827, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_Name
-      value: GroundTile SandCorner
+      value: GroundTile SandEdge-D
       objectReference: {fileID: 0}
     - target: {fileID: 8706690563705943995, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
