@@ -3,24 +3,28 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
     public static GridManager instance;
-    [SerializeField] private int _height, _width;
-    [SerializeField] private Dictionary<Vector2, Tile> tiles;
+/*  [SerializeField] private int _height, _width;
+    [SerializeField] private Dictionary<Vector2, Tile> tiles; */
     protected int variant;
-    [SerializeField] private Tile _tilePrefab;
+/*  [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Tile _tilePrefab2;
-    [SerializeField] private Tile _tilePrefab3;
+    [SerializeField] private Tile _tilePrefab3;*/
     [SerializeField] private Transform _camera;
     [SerializeField] private PlayerController _playerPrefab;
+    [SerializeField] private Tilemap tilemap;
     private GameObject player;
     public Tile getTileAtPos(Vector2 pos)
     {
-        if(tiles.TryGetValue(pos, out var tile))
+        Tile checkedTile = tilemap.GetInstantiatedObject(tilemap.WorldToCell((pos))).GetComponent<Tile>();
+        Debug.Log(checkedTile);
+        if(checkedTile)
         {
-            return tile;
+            return checkedTile;
         }
         return null;
     }
@@ -28,10 +32,10 @@ public class GridManager : MonoBehaviour
     public void generatePuzzle(int variant)
     {
         //create dictionary for background tiles
-        tiles = new Dictionary<Vector2, Tile>();
+       // tiles = new Dictionary<Vector2, Tile>();
         //generate background tiles
 
-                switch (variant)
+           /*     switch (variant)
                 {
                     case 1:
                         break;
@@ -74,7 +78,7 @@ public class GridManager : MonoBehaviour
                 break;
 
 
-                }
+                }*/
 
         GameManager.Instance.UpdateGameState(GameState.WaitForInput);
     }
@@ -89,7 +93,7 @@ public class GridManager : MonoBehaviour
     {
         instance = this;
         variant = 0;
-        _camera.transform.position = new Vector3((float)_width/2 - 0.5f, (float)_height/2 -0.5f, -10);
+        //_camera.transform.position = new Vector3((float)_width/2 - 0.5f, (float)_height/2 -0.5f, -10);
     }
     private void OnEnable()
     {

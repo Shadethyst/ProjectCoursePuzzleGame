@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private GridManager gridManager;
     private GameManager gameManager;
-    private PlayerController unit;
+    private Unit unit;
     private GameState currentGameState;
     [SerializeField] protected Item chosenItem;
 
@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
     {
         try
         {
-            gameManager = GameObject.Find("MapManager").GetComponent<GameManager>();
-            gridManager = GameObject.Find("MapManager").GetComponent<GridManager>();
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gridManager = GameObject.Find("GameManager").GetComponent<GridManager>();
             nextTile = null;
             playerInput = GetComponent<PlayerInput>();
             playerAnimator = this.GetComponent<Animator>();
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
             moveDown = playerInput.actions.FindAction("MoveDown");
             interact = playerInput.actions.FindAction("Interact");
             instance = this;
+            unit = GetComponent<Unit>();
         } 
         catch
         {
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CheckCurrentPosition();
     }
 
     // Update is called once per frame
@@ -107,7 +109,8 @@ public class PlayerController : MonoBehaviour
         if (!occupiedTile)
         {
             occupiedTile = gridManager.getTileAtPos(player.position);
-            unit.setOccupiedTile(occupiedTile);
+            setOccupiedTile(occupiedTile);
+            unit.SetOccupiedTile(occupiedTile);
         }
         
         return instance.getOccupiedTile();
@@ -135,11 +138,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("trying to place item");
             if(occupiedTile && GameManager.Instance.state == GameState.WaitForInput &&
                 ((occupiedTile.getCoords().x == hoveredTile.getCoords().x && System.Math.Abs(hoveredTile.getCoords().y - occupiedTile.getCoords().y) <= chosenItem.getRange())
                 || (occupiedTile.getCoords().y == hoveredTile.getCoords().y && System.Math.Abs(hoveredTile.getCoords().x - occupiedTile.getCoords().x) <= chosenItem.getRange())))
             {
+                Debug.Log(hoveredTile.getCoords());
                 gameManager.UpdateGameState(GameState.Placement);
             }
         }
@@ -168,8 +171,12 @@ public class PlayerController : MonoBehaviour
                 {
                     nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y + distance));
                 }
-                GameManager.Instance.UpdateGameState(GameState.Movement);
-                playerAnimator.SetBool("isWalking", true);
+
+                if (nextTile.Walkable)
+                {
+                    GameManager.Instance.UpdateGameState(GameState.Movement);
+                    playerAnimator.SetBool("isWalking", true);
+                }
             }
 
         }
@@ -181,7 +188,8 @@ public class PlayerController : MonoBehaviour
     }
     public void placeSelected()
     {
-        chosenItem.placeItem(hoveredTile.getCoords());
+        chosenItem.placeItem(hoveredTile.transform.position);
+       // chosenItem.placeItem(hoveredTile.getCoords());
         gameManager.UpdateGameState(GameState.Turn);
     }
     public Tile getHoveredTile() { return hoveredTile; }

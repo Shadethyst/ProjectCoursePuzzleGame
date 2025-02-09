@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1936578690349590223, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3037239970654346583, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3962048713745714827, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_Name
-      value: GroundTile SandEdge-U
+      value: GroundTile SandEdge-2
       objectReference: {fileID: 0}
     - target: {fileID: 8706690563705943995, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x

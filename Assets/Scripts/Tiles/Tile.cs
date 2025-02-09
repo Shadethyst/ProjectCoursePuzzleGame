@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public abstract class Tile : MonoBehaviour
 {
@@ -13,17 +14,18 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] protected Material _adjacentMaterial;
     [SerializeField] protected Material _nonAdjacentMaterial;
     public PlayerController occupiedUnit;
+    public Tilemap tilemap;
     public Item blockingItem;
     private Item[] items;
     protected Vector2 Coords;
     
     public bool Placable => _isPlacable && blockingItem == null;
     public bool Walkable => _isWalkable && blockingItem == null;
-    public virtual void Init(int x, int y)
+   /* public virtual void Init(int x, int y)
     {
         items = new Item[10];
         Coords = new Vector2(x, y);
-    }
+    }*/
     protected virtual void OnMouseEnter()
     {
         PlayerController.instance.setHoveredTile(this);
@@ -61,8 +63,6 @@ public abstract class Tile : MonoBehaviour
         }
     }
 
-
-
     protected virtual void checkInteraction()
     {
         foreach (Item interacting in items)
@@ -83,7 +83,10 @@ public abstract class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        tilemap = GameObject.Find("Grid").transform.GetChild(0).GetComponent<Tilemap>();
+        items = new Item[10];
+        Vector3 coordsIn3D = tilemap.WorldToCell(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
+        Coords = (Vector2)coordsIn3D;
     }
 
     // Update is called once per frame

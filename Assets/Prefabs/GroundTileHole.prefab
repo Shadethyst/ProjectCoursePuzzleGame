@@ -191,6 +191,7 @@ MonoBehaviour:
   _adjacentMaterial: {fileID: 2100000, guid: b07679b78b6b74b47919e38b78e1fbbe, type: 2}
   _nonAdjacentMaterial: {fileID: 2100000, guid: 54dc18a1477d76f4197f2326e060f8c5, type: 2}
   occupiedUnit: {fileID: 0}
+  tilemap: {fileID: 0}
   blockingItem: {fileID: 0}
 --- !u!61 &899149990549146748
 BoxCollider2D:
@@ -228,12 +229,12 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.2, y: 3.2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 3.2, y: 3.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.2, y: 3.2}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
