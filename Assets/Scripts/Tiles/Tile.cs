@@ -11,6 +11,7 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] protected bool _isWalkable;
     [SerializeField] protected bool _isPlacable;
     [SerializeField] protected bool _isAdjacent;
+    private bool walkableItem;
     [SerializeField] protected Material _adjacentMaterial;
     [SerializeField] protected Material _nonAdjacentMaterial;
     public PlayerController occupiedUnit;
@@ -20,7 +21,7 @@ public abstract class Tile : MonoBehaviour
     protected Vector2 Coords;
     
     public bool Placable => _isPlacable && blockingItem == null;
-    public bool Walkable => _isWalkable && blockingItem == null;
+    public bool Walkable => (_isWalkable || walkableItem) && blockingItem == null;
    /* public virtual void Init(int x, int y)
     {
         items = new Item[10];
@@ -110,6 +111,25 @@ public abstract class Tile : MonoBehaviour
     }
     public void setAdjacent(bool adjacent) {
     _isAdjacent = adjacent;
+    }
+    public void setWalkable(bool value)
+    {
+        walkableItem = value;
+    }
+    public bool getWalkable()
+    {
+        return walkableItem;
+    }
+    public void addItem(Item item, int id)
+    {
+        items[id] = item;
+    }
+    public Item getItem(int id)
+    {
+        return items[id];
+    }
+    public void removeItem(int id) {
+        items[id] = null;
     }
     
 }

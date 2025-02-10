@@ -2431,6 +2431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBordered
       objectReference: {fileID: 0}
+    - target: {fileID: 8611877224272979886, guid: 99fda064dc4177c48b4212b593d16e53, type: 3}
+      propertyPath: chosenItem
+      value: 
+      objectReference: {fileID: -9204530288677546467, guid: 6bc294907d45f954dbe878fd4007ded7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
