@@ -80,21 +80,30 @@ public abstract class Tile : MonoBehaviour
 
         }
     }
-    // Start is called before the first frame update
-    void Start()
+
+
+    private void Awake()
     {
         tilemap = GameObject.Find("Grid").transform.GetChild(0).GetComponent<Tilemap>();
         items = new Item[10];
-        Vector3 coordsIn3D = tilemap.WorldToCell(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
-        Coords = (Vector2)coordsIn3D;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (items.Length <= 0) items = new Item[0];
     }
-    public Vector2 getCoords() { return Coords; }
+    public Vector2 getCoords() 
+    {
+        Vector3 position3D = tilemap.WorldToCell(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
+        return (Vector2)position3D;
+    }
     public bool getAdjacent()
     {
         return _isAdjacent;

@@ -75,12 +75,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CheckCurrentPosition();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckCurrentPosition();
         if(GameManager.Instance.state == GameState.Movement)
         {
             if (inputGiven)
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerAnimator.SetBool("isWalking", false);
                 occupiedTile = nextTile;
-                setOccupiedTile(occupiedTile);
+                unit.SetOccupiedTile(occupiedTile);
                 nextTile = null;
                 gameManager.UpdateGameState(GameState.Turn);
             }
@@ -142,7 +143,6 @@ public class PlayerController : MonoBehaviour
                 ((occupiedTile.getCoords().x == hoveredTile.getCoords().x && System.Math.Abs(hoveredTile.getCoords().y - occupiedTile.getCoords().y) <= chosenItem.getRange())
                 || (occupiedTile.getCoords().y == hoveredTile.getCoords().y && System.Math.Abs(hoveredTile.getCoords().x - occupiedTile.getCoords().x) <= chosenItem.getRange())))
             {
-                Debug.Log(hoveredTile.getCoords());
                 gameManager.UpdateGameState(GameState.Placement);
             }
         }
@@ -155,21 +155,21 @@ public class PlayerController : MonoBehaviour
             {
                 if (context.action.id == moveLeft.id)
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x - distance, occupiedTile.transform.position.y));
+                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x - distance, occupiedTile.getCoords().y));
                     playerRenderer.flipX = false;
                 }
                 else if (context.action.id == moveRight.id)
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x + distance, occupiedTile.transform.position.y));
+                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x + distance, occupiedTile.getCoords().y));
                     playerRenderer.flipX = true;
                 }
                 else if (context.action.id == moveDown.id)
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y - distance));
+                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - distance));
                 }
                 else if (context.action.id == moveUp.id)
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.transform.position.x, occupiedTile.transform.position.y + distance));
+                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + distance));
                 }
 
                 if (nextTile.Walkable)
