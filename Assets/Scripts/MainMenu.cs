@@ -10,15 +10,29 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject[] listOfMenus;
     [SerializeField] private Button[] firstButtonsOfMenus;
     [SerializeField] private int menuId = 0;
+    [SerializeField] private Image gameStartFadeScreen;
+
+    private bool readyToChangeScenes;
 
     public void Start()
     {
+        readyToChangeScenes = false;
         SelectedMenu(menuId);
     }
 
+    public void Update()
+    {
+        if (readyToChangeScenes)
+        {
+            gameStartFadeScreen.CrossFadeAlpha(1.0f, 0.3f, false);
+            StartCoroutine(DoSceneTransition());
+        }
+    }
     public void OnStartGamePressed()
     {
-        SceneManager.LoadScene(1);
+        gameStartFadeScreen.gameObject.SetActive(true);
+        gameStartFadeScreen.canvasRenderer.SetAlpha(0.0f);
+        readyToChangeScenes = true;
     }
 
     public void OnQuitPressed()
@@ -54,5 +68,11 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(.2f);
         SelectedMenu(menuId);
+    }
+
+    IEnumerator DoSceneTransition()
+    {
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene(1);
     }
 }
