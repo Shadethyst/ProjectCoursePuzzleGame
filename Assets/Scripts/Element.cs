@@ -22,7 +22,9 @@ public class Element : Item
     public override void interact(Item interaction)
     {
         if(interaction is Element){
-            Instantiate(transformElement, this.transform.position, Quaternion.identity);
+            
+            var spawnedElement = Instantiate(transformElement, this.transform.position, Quaternion.identity);
+            spawnedElement.name = "interactedElement";
             this.enabled = false;
         }
     }

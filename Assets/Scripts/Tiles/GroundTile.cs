@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundTile : Tile
 {
-    private void Awake()
+    private void Start()
     {
         _isWalkable = true;
         _isPlacable = true;

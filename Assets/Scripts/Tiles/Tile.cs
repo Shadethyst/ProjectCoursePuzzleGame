@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public abstract class Tile : MonoBehaviour
 {
@@ -13,18 +14,19 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] protected Material _adjacentMaterial;
     [SerializeField] protected Material _nonAdjacentMaterial;
     public PlayerController occupiedUnit;
+    public Tilemap tilemap;
     public Item blockingItem;
     private Item[] items;
     protected Vector2 Coords;
     
     public bool Placable => _isPlacable && blockingItem == null;
     public bool Walkable => _isWalkable && blockingItem == null;
-    public virtual void Init(int x, int y)
+   /* public virtual void Init(int x, int y)
     {
         items = new Item[10];
         Coords = new Vector2(x, y);
-    }
-    private void OnMouseEnter()
+    }*/
+    protected virtual void OnMouseEnter()
     {
         PlayerController.instance.setHoveredTile(this);
 
@@ -42,7 +44,7 @@ public abstract class Tile : MonoBehaviour
         
 
     }
-    private void OnMouseExit() {
+    protected virtual void OnMouseExit() {
         _highlight.SetActive(false);
     }
     private void OnEnable()
@@ -53,30 +55,39 @@ public abstract class Tile : MonoBehaviour
     {
         GameManager.OnGameStateChanged -= OnOnGameStateChanged;
     }
-    private void OnOnGameStateChanged(GameState state)
+    protected virtual void OnOnGameStateChanged(GameState state)
     {
-        if(state == GameState.Turn)
+        if (state == GameState.Turn)
         {
             checkInteraction();
         }
     }
 
-
-
-    private void checkInteraction()
+    protected virtual void checkInteraction()
     {
         foreach (Item interacting in items)
         {
-            foreach (Item interacted in items)
+            if (interacting)
             {
-                if (interacting != null && interacted != null && !interacting.Equals(interacted))
+                foreach (Item interacted in items)
                 {
-                    interacting.interact(interacted);
+                    if (interacting != null && interacted != null && !interacting.Equals(interacted))
+                    {
+                        interacting.interact(interacted);
+                    }
                 }
             }
 
         }
     }
+
+
+    private void Awake()
+    {
+        tilemap = GameObject.Find("Grid").transform.GetChild(0).GetComponent<Tilemap>();
+        items = new Item[10];
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,9 +97,13 @@ public abstract class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (items.Length <= 0) items = new Item[0];
     }
-    public Vector2 getCoords() { return Coords; }
+    public Vector2 getCoords() 
+    {
+        Vector3 position3D = tilemap.WorldToCell(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
+        return (Vector2)position3D;
+    }
     public bool getAdjacent()
     {
         return _isAdjacent;
