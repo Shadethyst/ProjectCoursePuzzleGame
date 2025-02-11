@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2034783858122708549}
   - component: {fileID: 645940419534530220}
-  - component: {fileID: 296896273113611772}
   m_Layer: 0
   m_Name: AirPrefab
   m_TagString: Untagged
@@ -85,17 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &296896273113611772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803136727986357579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62aadf5b850ba844b9792aef4ded046b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 1
-  transformElement: {fileID: 0}
