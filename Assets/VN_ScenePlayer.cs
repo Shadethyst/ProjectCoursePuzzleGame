@@ -38,7 +38,7 @@ public class VisualNovelPlayer : MonoBehaviour
                 StartCoroutine(AutomaticPageTurn());
             }
         }
-        if (PageTurningAttempted() && readyToChangePages && currentPage < vnPages.Length - 1 && !vnPages[currentPage].GetAutomaticalTurn())
+        if (PageTurningAttempted() && readyToChangePages && vnPages[currentPage].GetReadyForPageTurn() && currentPage < vnPages.Length - 1 && !vnPages[currentPage].GetAutomaticalTurn())
         {
             readyToChangePages = false;
             TurnPage();
