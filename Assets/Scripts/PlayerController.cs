@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected Item chosenItem;
     [SerializeField] protected Item[] inventory;
     private int itemCounter = 0;
-    private bool readyToBrowse;
 
     private Tile occupiedTile;
     private Tile nextTile;
@@ -73,7 +72,6 @@ public class PlayerController : MonoBehaviour
             instance = this;
             unit = GetComponent<Unit>();
             chosenItem = inventory[itemCounter];
-            readyToBrowse = true;
         } 
         catch
         {
@@ -108,15 +106,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (browseLeft.IsPressed() && readyToBrowse)
-        {
-            handleItemBrowsing("left");
-        }
-        else if (browseRight.IsPressed() && readyToBrowse)
-        {
-            handleItemBrowsing("right");
-        }
-
         Debug.Log("Chosen item is: " + chosenItem);
     }
     public void ResetPlayerPosition(float x, float y)
@@ -148,41 +137,35 @@ public class PlayerController : MonoBehaviour
         return chosenItem;
     }
 
-    public void handleItemBrowsing(string direction)
+    public void handleItemBrowsing(InputAction.CallbackContext context)
     {
-        readyToBrowse = false;
-
-        if (direction == "left")
+        if (context.performed)
         {
-            if (itemCounter == 0)
+            if (context.action.id == browseLeft.id)
             {
-                itemCounter = inventory.Length - 1;
+                if (itemCounter == 0)
+                {
+                    itemCounter = inventory.Length - 1;
+                }
+                else
+                {
+                    itemCounter--;
+                }
             }
-            else
+            else if (context.action.id == browseRight.id)
             {
-                itemCounter--;
+                if (itemCounter == inventory.Length - 1)
+                {
+                    itemCounter = 0;
+                }
+                else
+                {
+                    itemCounter++;
+                }
             }
         }
-        else if (direction == "right")
-        {
-            if (itemCounter == inventory.Length -1 )
-            {
-                itemCounter = 0;
-            }
-            else
-            {
-                itemCounter++;
-            }
-        }
-        chosenItem = inventory[itemCounter];
-        StartCoroutine(ResetReadyToBrowse(0.5f));
-    }
-
-    public IEnumerator ResetReadyToBrowse(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        readyToBrowse = true;
-    }
+    chosenItem = inventory[itemCounter];
+}
 
 
     /**
