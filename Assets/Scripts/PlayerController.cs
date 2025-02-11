@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour
             moveUp = playerInput.actions.FindAction("MoveUp");
             moveDown = playerInput.actions.FindAction("MoveDown");
             interact = playerInput.actions.FindAction("Interact");
+            browseLeft = playerInput.actions.FindAction("BrowseLeft");
+            browseRight = playerInput.actions.FindAction("BrowseRight");
             instance = this;
             unit = GetComponent<Unit>();
             chosenItem = inventory[itemSelectionCounter];
