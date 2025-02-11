@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private InputAction moveRight;
     private InputAction moveUp;
     private InputAction moveDown;
+    private InputAction browseLeft;
+    private InputAction browseRight;
     private InputAction interact;
 
     private GridManager gridManager;
@@ -36,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private Unit unit;
     private GameState currentGameState;
     [SerializeField] protected Item chosenItem;
+    [SerializeField] protected Item[] inventory;
+    private int itemSelectionCounter = 0;
 
     private Tile occupiedTile;
     private Tile nextTile;
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
             interact = playerInput.actions.FindAction("Interact");
             instance = this;
             unit = GetComponent<Unit>();
+            chosenItem = inventory[itemSelectionCounter];
         } 
         catch
         {
@@ -128,6 +133,38 @@ public class PlayerController : MonoBehaviour
     {
         return chosenItem;
     }
+
+    public void handleItemBrowsing(InputAction.CallbackContext context)
+    {
+        if (context.performed) 
+        {
+            if (context.action.id == browseLeft.id)
+            {
+                if (itemSelectionCounter == 0)
+                {
+                    itemSelectionCounter = inventory.Length - 1;
+                }
+                else
+                {
+                    itemSelectionCounter--;
+                }
+            }
+            else if (context.action.id == browseRight.id)
+            {
+                if (itemSelectionCounter == inventory.Length - 1)
+                {
+                    itemSelectionCounter = 0;
+                }
+                else
+                {
+                    itemSelectionCounter++;
+                }
+            }
+
+            chosenItem = inventory[itemSelectionCounter];
+        }
+    }
+
 
     /**
     * tries to add an element to the clicked tile,
