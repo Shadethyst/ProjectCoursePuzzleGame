@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private InputAction moveRight;
     private InputAction moveUp;
     private InputAction moveDown;
+    private InputAction browseLeft;
+    private InputAction browseRight;
     private InputAction interact;
 
     private GridManager gridManager;
@@ -36,6 +39,9 @@ public class PlayerController : MonoBehaviour
     private Unit unit;
     private GameState currentGameState;
     [SerializeField] protected Item chosenItem;
+    [SerializeField] protected Item[] inventory;
+    private int itemCounter = 0;
+    private bool readyToBrowse;
 
     private Tile occupiedTile;
     private Tile nextTile;
@@ -61,9 +67,13 @@ public class PlayerController : MonoBehaviour
             moveRight = playerInput.actions.FindAction("MoveRight");
             moveUp = playerInput.actions.FindAction("MoveUp");
             moveDown = playerInput.actions.FindAction("MoveDown");
+            browseLeft = playerInput.actions.FindAction("BrowseItemLeft");
+            browseRight = playerInput.actions.FindAction("BrowseItemRight");
             interact = playerInput.actions.FindAction("Interact");
             instance = this;
             unit = GetComponent<Unit>();
+            chosenItem = inventory[itemCounter];
+            readyToBrowse = true;
         } 
         catch
         {
@@ -98,7 +108,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (browseLeft.IsPressed() && readyToBrowse)
+        {
+            handleItemBrowsing("left");
+        }
+        else if (browseRight.IsPressed() && readyToBrowse)
+        {
+            handleItemBrowsing("right");
+        }
 
+        Debug.Log("Chosen item is: " + chosenItem);
     }
     public void ResetPlayerPosition(float x, float y)
     {
@@ -129,6 +148,43 @@ public class PlayerController : MonoBehaviour
         return chosenItem;
     }
 
+    public void handleItemBrowsing(string direction)
+    {
+        readyToBrowse = false;
+
+        if (direction == "left")
+        {
+            if (itemCounter == 0)
+            {
+                itemCounter = inventory.Length - 1;
+            }
+            else
+            {
+                itemCounter--;
+            }
+        }
+        else if (direction == "right")
+        {
+            if (itemCounter == inventory.Length -1 )
+            {
+                itemCounter = 0;
+            }
+            else
+            {
+                itemCounter++;
+            }
+        }
+        chosenItem = inventory[itemCounter];
+        StartCoroutine(ResetReadyToBrowse(0.5f));
+    }
+
+    public IEnumerator ResetReadyToBrowse(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        readyToBrowse = true;
+    }
+
+
     /**
     * tries to add an element to the clicked tile,
     * checks that the direction pressed is a cardinal direction and
@@ -155,6 +211,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (context.action.id == moveLeft.id)
                 {
+                    Debug.Log("Move left");
                     nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x - distance, occupiedTile.getCoords().y));
                     playerRenderer.flipX = false;
                 }
