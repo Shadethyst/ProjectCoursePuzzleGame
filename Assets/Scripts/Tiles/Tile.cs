@@ -11,6 +11,7 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] protected bool _isWalkable;
     [SerializeField] protected bool _isPlacable;
     [SerializeField] protected bool _isAdjacent;
+    [SerializeField] protected bool _isFlowable;
     private bool walkableItem;
     [SerializeField] protected Material _adjacentMaterial;
     [SerializeField] protected Material _nonAdjacentMaterial;
@@ -19,9 +20,10 @@ public abstract class Tile : MonoBehaviour
     public Item blockingItem;
     private Item[] items;
     protected Vector2 Coords;
-    
-    public bool Placable => _isPlacable && blockingItem == null;
+
+    public bool Placable => _isPlacable;
     public bool Walkable => (_isWalkable || walkableItem) && blockingItem == null;
+    public bool Flowable => _isFlowable;
    /* public virtual void Init(int x, int y)
     {
         items = new Item[10];
