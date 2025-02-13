@@ -91,8 +91,7 @@ public class Water : Item
      */
     public void transformInto(Item change)
     {
-        var spawnedElement = Instantiate(change, this.transform.position, Quaternion.identity);
-        spawnedElement.name = "interactedElement";
+        change.placeItem(this.transform.position);
         this.remove();
     }
     /*
@@ -101,22 +100,22 @@ public class Water : Item
     private void moveInDir(int direction)
     {
         Debug.Log("moving in dir: " + direction);
-        if (direction == 0)
+        if (direction == 0 && GridManager.instance.getTileAtPos(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1)) != null)
         {
             nextTile = GridManager.instance.getTileAtPos(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1));
             Debug.Log("cased direction: " + 0);
         }
-        else if(direction == 1)
+        else if(direction == 1 && GridManager.instance.getTileAtPos(new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y)) != null)
         {
             nextTile = GridManager.instance.getTileAtPos(new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y));
             Debug.Log("cased direction: " + 1);
         }
-        else if(direction == 2)
+        else if(direction == 2 && GridManager.instance.getTileAtPos(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1)) != null)
         {
             nextTile = GridManager.instance.getTileAtPos(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1));
             Debug.Log("cased direction: " + 2);
         }
-        else if(direction == 3)
+        else if(direction == 3 && GridManager.instance.getTileAtPos(new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y)) != null)
         {
             nextTile = GridManager.instance.getTileAtPos(new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y));
             Debug.Log("cased direction: " + 3);

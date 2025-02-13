@@ -91,10 +91,7 @@ public class PlayerController : MonoBehaviour
         CheckCurrentPosition();
         if(GameManager.Instance.state == GameState.Movement)
         {
-            if (inputGiven)
-            {
-                player.position = Vector2.MoveTowards(player.position, nextTile.transform.position, speed * Time.deltaTime);
-            }
+            player.position = Vector2.MoveTowards(player.position, nextTile.transform.position, speed * Time.deltaTime);
             if (player.position == nextTile.transform.position)
             {
                 playerAnimator.SetBool("isWalking", false);
@@ -227,6 +224,10 @@ public class PlayerController : MonoBehaviour
                 {
                     GameManager.Instance.UpdateGameState(GameState.Movement);
                     playerAnimator.SetBool("isWalking", true);
+                }
+                else
+                {
+                    nextTile = null;
                 }
             }
 

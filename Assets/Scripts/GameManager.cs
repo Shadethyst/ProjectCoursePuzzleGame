@@ -34,13 +34,13 @@ public class GameManager : MonoBehaviour
     {
         if(state == GameState.ItemMovement && movementDone >= movers)
         {
-            UpdateGameState(GameState.Turn);
-            movementDone = 0;
+            //UpdateGameState(GameState.Turn);
+            //movementDone = 0;
         }
         if(state == GameState.Turn && interactionDone >= interactors)
         {
-            UpdateGameState(GameState.WaitForInput);
-            interactionDone = 0;
+            //UpdateGameState(GameState.WaitForInput);
+            //interactionDone = 0;
         }
     }
     /*
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             case GameState.Defeat:
                 break;
             case GameState.Movement:
-                PlayerController.instance.movePlayer();
+                
                 break;
             case GameState.Placement:
                 PlayerController.instance.placeSelected();

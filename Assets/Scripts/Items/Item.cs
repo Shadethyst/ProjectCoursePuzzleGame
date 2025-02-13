@@ -10,7 +10,13 @@ public abstract class Item : MonoBehaviour
     [SerializeField] protected int id;
     public virtual void placeItem(Vector2 pos)
     {
-        var spawnedItem = Instantiate(this, pos, Quaternion.identity);
+        if (GridManager.instance.getTileAtPos(pos).getItem(id) == null)
+        {
+            var spawnedItem = Instantiate(this, pos, Quaternion.identity);
+            GridManager.instance.getTileAtPos(pos).addItem(spawnedItem.gameObject.GetComponent<Item>(), id);
+            GridManager.instance.getTileAtPos(pos).checkInteraction();
+        }
+            
     }
     private void Awake()
     {
@@ -37,6 +43,7 @@ public abstract class Item : MonoBehaviour
     }
     public int getRange() {  return range; }
     public void setRange(int range) {  this.range = range; }
+    public int getId() { return id; }
 
     /*
      * for now items interact upwards -> lower id has logic for how interaction happens with higher id Items
