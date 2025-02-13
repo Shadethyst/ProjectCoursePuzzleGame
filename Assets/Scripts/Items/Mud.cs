@@ -16,6 +16,16 @@ public class Mud : Item
         range = 0;
         GameManager.Instance.changeInteractor(1);
     }
+    public override void placeItem(Vector2 pos)
+    {
+        base.placeItem(pos);
+        GridManager.instance.getTileAtPos(pos).setWalkable(true);
+    }
+    public override void remove()
+    {
+        base.remove();
+        GridManager.instance.getTileAtPos(this.transform.position).setWalkable(false);
+    }
 
     // Update is called once per frame
     void Update()
