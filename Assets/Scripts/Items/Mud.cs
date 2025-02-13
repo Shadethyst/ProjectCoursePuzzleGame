@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mud : Item
 {
+    [SerializeField] public Brick brick;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +22,14 @@ public class Mud : Item
     {
         
     }
-    public override void interact(Item interaction)
+    public override void interact(int interaction)
     {
         base.interact(interaction);
+        if(interaction == 3)
+        {
+            brick.placeItem(this.transform.position);
+            remove();
+
+        }
     }
 }

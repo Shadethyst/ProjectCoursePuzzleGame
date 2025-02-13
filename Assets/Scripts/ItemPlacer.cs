@@ -22,7 +22,7 @@ public class ItemPlacer : MonoBehaviour
         if (GridManager.instance.getTileAtPos(gameObject.transform.position))
         {
             placementItem.GetComponent<Item>().placeItem(gameObject.transform.position);
-            this.enabled = false;
+            gameObject.SetActive(false);
         }
     }
 }

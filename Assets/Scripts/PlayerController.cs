@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if(occupiedTile && GameManager.Instance.state == GameState.WaitForInput &&
+            if(occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile &&
                 ((occupiedTile.getCoords().x == hoveredTile.getCoords().x && System.Math.Abs(hoveredTile.getCoords().y - occupiedTile.getCoords().y) <= chosenItem.getRange())
                 || (occupiedTile.getCoords().y == hoveredTile.getCoords().y && System.Math.Abs(hoveredTile.getCoords().x - occupiedTile.getCoords().x) <= chosenItem.getRange())))
             {

@@ -24,13 +24,12 @@ public class Fire : Item
         
     }
 
-    public override void interact(Item interaction)
+    public override void interact(int interaction)
     {
         base.interact(interaction);
-        if (interaction is Mud)
+        if (interaction == 5 || interaction == 2)
         {
-            interaction.remove();
-            transformInto(transformElement);
+            remove();
         }
     }
     public void transformInto(Item change)

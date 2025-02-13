@@ -9,31 +9,37 @@ public class Water : Item
     [SerializeField] protected Item transformElement;
     private Vector2 movementDir;
     private Tile nextTile;
+    private bool canMove;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        id = 1;
+        range = 1;
+        GameManager.Instance.changeInteractor(1);
+        _itemCollider = GetComponent<Collider2D>();
+        Debug.Log("setting collider2D " + _itemCollider);
+        GameManager.Instance.changeInteractor(1);
+        GameManager.Instance.changeMover(1);
     }
 
     private void Awake()
     {
-        id = 1;
-        range = 1;
-        
-        GameManager.Instance.changeInteractor(1);
-        GameManager.Instance.changeMover(1);
+
         
     }
     // Update is called once per frame
     void Update()
     {
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        GameManager.Instance.changeInteractor(1);
+        _itemCollider = GetComponent<Collider2D>();
+        Debug.Log("setting collider2D " + _itemCollider);
         GameManager.OnGameStateChanged += OnOnGameStateChanged;
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
         GameManager.OnGameStateChanged -= OnOnGameStateChanged;
     }
@@ -42,37 +48,39 @@ public class Water : Item
      */
     public override void placeItem(Vector2 pos)
     {
-        /// add this check to playercontroller instead!!
-        if(GridManager.instance.getTileAtPos(pos).getItem(id) == null)
+        if (GridManager.instance.getTileAtPos(pos).getItem(id) != false)
         {
+            Debug.Log("there is water in the spot!");
+        }
+        /// add this check to playercontroller instead!!
+        else {
             Debug.Log("placing item");
             var spawnedItem = Instantiate(this, pos, Quaternion.identity);
 
             Tile tile = GridManager.instance.getTileAtPos(pos);
             
-            tile.addItem(spawnedItem.gameObject.GetComponent<Item>(), id);
-            tile.checkInteraction();
+            tile.addItem(id);
 
             Tile occupied = PlayerController.instance.getOccupiedTile();
 
             Vector2 delta = tile.getCoords() - occupied.getCoords();
 
             spawnedItem.setMovementDir(delta);
-
+            
             Debug.Log("set movement direction: " + delta);
+
+            canMove = false;
         }
     }
-    public override void interact(Item interaction)
+    public override void interact(int interaction)
     {
         
-        if (interaction is Earth)
+        if (interaction == 2)
         {
-            interaction.remove();
             transformInto(transformElement);
         }
-        if(interaction is Fire)
+        if(interaction == 3)
         {
-            interaction.remove();
             remove();
         }
         base.interact(interaction);
@@ -98,8 +106,10 @@ public class Water : Item
         if (nextTile && nextTile.Flowable)
         {
             gameObject.transform.position = nextTile.transform.position;
-            GridManager.instance.getTileAtPos(gameObject.transform.position).removeItem(id);
-            nextTile.addItem(gameObject.GetComponent<Item>(), id);
+            Debug.Log("old tile water state: " + GridManager.instance.getTileAtPos(this.transform.position).getItem(id));
+            GridManager.instance.getTileAtPos(this.transform.position).removeItem(id);
+            nextTile.addItem(id);
+            Debug.Log(nextTile.getItem(id));
         }
         nextTile = null;
 
@@ -109,11 +119,16 @@ public class Water : Item
         // Mathf.Sign(0) == 1, Math.Sign(0) == 0 :rolleyes:
         movementDir = new Vector2(Math.Sign(dir.x), Math.Sign(dir.y));
     }
-    protected void OnOnGameStateChanged(GameState state)
+    protected override void OnOnGameStateChanged(GameState state)
     {
-        if(state == GameState.ItemMovement)
+        base.OnOnGameStateChanged(state);
+        if(state == GameState.ItemMovement && canMove)
         {
             moveInDir(movementDir);
+        }
+        if(state == GameState.Turn && canMove == false)
+        {
+            canMove = true;
         }
     }
 }

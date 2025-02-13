@@ -18,6 +18,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private PlayerController _playerPrefab;
     [SerializeField] private Tilemap tilemap;
     private GameObject player;
+
     public Tile getTileAtPos(Vector2 pos)
     {
         if (tilemap.GetInstantiatedObject(tilemap.WorldToCell((pos)))){

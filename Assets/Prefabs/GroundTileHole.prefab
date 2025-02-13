@@ -94,8 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 720133610040323984}
   - component: {fileID: 6656048496068219928}
-  - component: {fileID: 531909222724909462}
   - component: {fileID: 899149990549146748}
+  - component: {fileID: 4603045866848181128}
   m_Layer: 0
   m_Name: GroundTileHole
   m_TagString: Untagged
@@ -171,28 +171,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &531909222724909462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5501588954600524951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe12a6a0d1131734ab6548b0efab727f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 6656048496068219928}
-  _highlight: {fileID: 1947118413954747988}
-  _isWalkable: 0
-  _isPlacable: 0
-  _isAdjacent: 0
-  _adjacentMaterial: {fileID: 2100000, guid: b07679b78b6b74b47919e38b78e1fbbe, type: 2}
-  _nonAdjacentMaterial: {fileID: 2100000, guid: 54dc18a1477d76f4197f2326e060f8c5, type: 2}
-  occupiedUnit: {fileID: 0}
-  tilemap: {fileID: 0}
-  blockingItem: {fileID: 0}
 --- !u!61 &899149990549146748
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -238,3 +216,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4603045866848181128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5501588954600524951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a118edcd0067a47a1b485118c3cb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 6656048496068219928}
+  _highlight: {fileID: 1947118413954747988}
+  _isWalkable: 0
+  _isPlacable: 0
+  _isAdjacent: 0
+  _isFlowable: 0
+  _adjacentMaterial: {fileID: 0}
+  _nonAdjacentMaterial: {fileID: 0}
+  occupiedUnit: {fileID: 0}
+  tilemap: {fileID: 0}
+  blockingItem: {fileID: 0}

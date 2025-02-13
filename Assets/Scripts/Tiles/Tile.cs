@@ -18,7 +18,7 @@ public abstract class Tile : MonoBehaviour
     public PlayerController occupiedUnit;
     public Tilemap tilemap;
     public Item blockingItem;
-    private Item[] items;
+    private bool[] items;
     protected Vector2 Coords;
 
     public bool Placable => _isPlacable;
@@ -50,45 +50,47 @@ public abstract class Tile : MonoBehaviour
     protected virtual void OnMouseExit() {
         _highlight.SetActive(false);
     }
-    private void OnEnable()
+    /*private void OnEnable()
     {
         GameManager.OnGameStateChanged += OnOnGameStateChanged;
     }
     private void OnDisable()
     {
         GameManager.OnGameStateChanged -= OnOnGameStateChanged;
-    }
+    }*/
     protected virtual void OnOnGameStateChanged(GameState state)
     {
         if (state == GameState.Turn)
         {
-            checkInteraction();
+            //checkInteraction();
         }
     }
 
-    public virtual void checkInteraction()
+/*    public virtual void checkInteraction()
     {
         foreach (Item interacting in items)
         {
             if (interacting)
             {
+                Debug.Log("interacting object" + interacting);
                 foreach (Item interacted in items)
                 {
                     if (interacting != null && interacted != null && !interacting.Equals(interacted))
                     {
+                        Debug.Log("interacted with: " + interacted); 
                         interacting.interact(interacted);
                     }
                 }
             }
 
         }
-    }
+    }*/
 
 
     private void Awake()
     {
         tilemap = GameObject.Find("Grid").transform.GetChild(0).GetComponent<Tilemap>();
-        items = new Item[10];
+        items = new bool[10];
     }
 
     // Start is called before the first frame update
@@ -100,7 +102,7 @@ public abstract class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (items.Length <= 0) items = new Item[0];
+        if (items.Length <= 0) items = new bool[0];
     }
     public Vector2 getCoords() 
     {
@@ -122,16 +124,16 @@ public abstract class Tile : MonoBehaviour
     {
         return walkableItem;
     }
-    public void addItem(Item item, int id)
+    public void addItem(int id)
     {
-        items[id] = item;
+        items[id] = true;
     }
-    public Item getItem(int id)
+    public bool getItem(int id)
     {
         return items[id];
     }
     public void removeItem(int id) {
-        items[id] = null;
+        items[id] = false;
     }
     
 }

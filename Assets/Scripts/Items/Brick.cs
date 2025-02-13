@@ -32,7 +32,7 @@ public class Brick : Item
     {
         
     }
-    public override void interact(Item interaction)
+    public override void interact(int interaction)
     {
         base.interact(interaction);
     }
