@@ -201,26 +201,26 @@ public class PlayerController : MonoBehaviour
         {
             if(GameManager.Instance.state == GameState.WaitForInput)
             {
-                if (context.action.id == moveLeft.id)
+                if (context.action.id == moveLeft.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x - distance, occupiedTile.getCoords().y)) != null)
                 {
                     nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x - distance, occupiedTile.getCoords().y));
                     playerRenderer.flipX = false;
                 }
-                else if (context.action.id == moveRight.id)
+                else if (context.action.id == moveRight.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x + distance, occupiedTile.getCoords().y)))
                 {
                     nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x + distance, occupiedTile.getCoords().y));
                     playerRenderer.flipX = true;
                 }
-                else if (context.action.id == moveDown.id)
+                else if (context.action.id == moveDown.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - distance)))
                 {
                     nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - distance));
                 }
-                else if (context.action.id == moveUp.id)
+                else if (context.action.id == moveUp.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + distance)))
                 {
                     nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + distance));
                 }
 
-                if (nextTile.Walkable)
+                if (nextTile && nextTile.Walkable)
                 {
                     GameManager.Instance.UpdateGameState(GameState.Movement);
                     playerAnimator.SetBool("isWalking", true);

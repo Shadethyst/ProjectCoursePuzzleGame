@@ -142,7 +142,7 @@ public class Water : Item
             default:
                 break;
         }*/
-        if (nextTile.Flowable)
+        if (nextTile && nextTile.Flowable)
         {
             gameObject.transform.position = nextTile.transform.position;
             GridManager.instance.getTileAtPos(gameObject.transform.position).removeItem(id);

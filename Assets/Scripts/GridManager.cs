@@ -20,11 +20,13 @@ public class GridManager : MonoBehaviour
     private GameObject player;
     public Tile getTileAtPos(Vector2 pos)
     {
-        Tile checkedTile = tilemap.GetInstantiatedObject(tilemap.WorldToCell((pos))).GetComponent<Tile>();
-        Debug.Log(checkedTile);
-        if(checkedTile)
-        {
-            return checkedTile;
+        if (tilemap.GetInstantiatedObject(tilemap.WorldToCell((pos)))){
+            Tile checkedTile = tilemap.GetInstantiatedObject(tilemap.WorldToCell((pos))).GetComponent<Tile>();
+            Debug.Log(checkedTile);
+            if (checkedTile)
+            {
+                return checkedTile;
+            }
         }
         return null;
     }
