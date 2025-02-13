@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
                 occupiedTile = nextTile;
                 unit.SetOccupiedTile(occupiedTile);
                 nextTile = null;
-                gameManager.UpdateGameState(GameState.Turn);
+                gameManager.UpdateGameState(GameState.ItemMovement);
             }
         }
 
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
     {
         chosenItem.placeItem(hoveredTile.transform.position);
        // chosenItem.placeItem(hoveredTile.getCoords());
-        gameManager.UpdateGameState(GameState.Turn);
+        gameManager.UpdateGameState(GameState.ItemMovement);
     }
     public Tile getHoveredTile() { return hoveredTile; }
     public void setHoveredTile(Tile tile) {  hoveredTile = tile; }
