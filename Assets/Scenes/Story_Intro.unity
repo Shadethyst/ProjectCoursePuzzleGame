@@ -240,10 +240,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6509142154058055225, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_text
-      value: '"I have not forgotten what HERMES said to me...
-
-        I must create
-        AMBROSIA... at any cost!"'
+      value: '"I have not forgotten what HERMES said to me that day... I must create
+        AMBROSIA, at any cost!"'
       objectReference: {fileID: 0}
     - target: {fileID: 6509142154058055225, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_fontColor.b
