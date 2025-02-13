@@ -8,6 +8,7 @@ public class GroundTile : Tile
     {
         _isWalkable = true;
         _isPlacable = true;
+        _isFlowable = true;
     }
 
 }

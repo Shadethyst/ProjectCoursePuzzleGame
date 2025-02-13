@@ -8,6 +8,7 @@ public class WallTile : Tile
     {
         _isWalkable = false;
         _isPlacable = false;
+        _isFlowable = false;
     }
 
     // Update is called once per frame
