@@ -10,16 +10,18 @@ public abstract class Item : MonoBehaviour
     [SerializeField] protected int id;
     public virtual void placeItem(Vector2 pos)
     {
-        Instantiate(this, pos, Quaternion.identity);
+        var spawnedItem = Instantiate(this, pos, Quaternion.identity);
     }
     private void Awake()
     {
         range = 1;
         id = 0;
+        GameManager.Instance.changeInteractor(1);
     }
     public virtual void remove()
     {
         GridManager.instance.getTileAtPos(this.transform.position).removeItem(id);
+        GameManager.Instance.changeInteractor(-1);
         Destroy(this);
     }
     // Start is called before the first frame update
@@ -41,6 +43,6 @@ public abstract class Item : MonoBehaviour
      */
     public virtual void interact(Item interaction)
     {
-
+        GameManager.Instance.doneInteracting();
     }
 }

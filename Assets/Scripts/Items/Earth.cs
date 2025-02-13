@@ -8,6 +8,7 @@ public class Earth : Item
     private void Awake()
     {
         id = 2;
+        GameManager.Instance.changeInteractor(1);
     }
     // Start is called before the first frame update
     void Start()
@@ -32,5 +33,6 @@ public class Earth : Item
     }
     public override void interact(Item interaction)
     {
+        base.interact(interaction);
     }
 }

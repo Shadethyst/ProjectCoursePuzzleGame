@@ -12,11 +12,16 @@ public class Brick : Item
     private void Awake()
     {
         id = 6;
+        GameManager.Instance.changeInteractor(1);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public override void interact(Item interaction)
+    {
+        base.interact(interaction);
     }
 }

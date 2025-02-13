@@ -8,20 +8,41 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState state;
     public static event Action<GameState> OnGameStateChanged;
+    private int movers;
+    private int movementDone;
+    private int interactionDone;
+    private int interactors;
 
     private void Awake()
     {
         Instance = this;
+        movementDone = 0;
+        movers = 0;
     }
     private void Start()
     {
         UpdateGameState(GameState.GenerateLevel);
     }
-    private IEnumerator minTurnDuration()
+    private IEnumerator minTurnDuration(GameState state)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        UpdateGameState(state);
     }
 
+
+    private void Update()
+    {
+        if(state == GameState.ItemMovement && movementDone >= movers)
+        {
+            UpdateGameState(GameState.Turn);
+            movementDone = 0;
+        }
+        if(state == GameState.Turn && interactionDone >= interactors)
+        {
+            UpdateGameState(GameState.WaitForInput);
+            interactionDone = 0;
+        }
+    }
     /*
      *updates game state
      *current game states:
@@ -44,7 +65,13 @@ public class GameManager : MonoBehaviour
             case GameState.WaitForInput:
                 break;
             case GameState.Turn:
-                UpdateGameState(GameState.WaitForInput);
+                interactionDone = 0;
+                StartCoroutine(minTurnDuration(GameState.WaitForInput));
+                
+                break;
+            case GameState.ItemMovement:
+                movementDone = 0;
+                StartCoroutine(minTurnDuration(GameState.Turn));
                 break;
             case GameState.LevelComplete:
                 break;
@@ -62,13 +89,31 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
         Debug.Log(newState);
     }
+    public void changeMover(int add)
+    {
+        movers += add;
+    }
+    public void doneMoving()
+    {
+        movementDone += 1;
+    }
+    public void changeInteractor(int add)
+    {
+        interactors += add;
+    }
+    public void doneInteracting()
+    {
+        interactionDone += 1;
+    }
 } 
+
 public enum GameState
 {
     GenerateLevel,
     WaitForInput,
     Movement,
     Placement,
+    ItemMovement,
     Turn,
     LevelComplete,
     Defeat

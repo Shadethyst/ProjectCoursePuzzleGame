@@ -64,7 +64,7 @@ public abstract class Tile : MonoBehaviour
         }
     }
 
-    protected virtual void checkInteraction()
+    public virtual void checkInteraction()
     {
         foreach (Item interacting in items)
         {
