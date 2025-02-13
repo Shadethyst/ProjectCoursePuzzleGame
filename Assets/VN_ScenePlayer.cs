@@ -30,6 +30,7 @@ public class VisualNovelPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(SceneManager.GetActiveScene().name);
         if ((start && currentPage == 0) || vnPages[currentPage].GetAutomaticalTurn())
         {
             if (!readyToChangePages)
@@ -48,9 +49,13 @@ public class VisualNovelPlayer : MonoBehaviour
             completed = true;
         }
 
-        if (completed)
+        if (completed && SceneManager.GetActiveScene().name == "Story_Intro")
         {
             SceneManager.LoadScene(2);
+        }
+        else if (completed && SceneManager.GetActiveScene().name != "Story_Intro")
+        {
+            this.gameObject.SetActive(false);
         }
     }
 
