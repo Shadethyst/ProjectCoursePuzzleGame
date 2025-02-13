@@ -98,8 +98,20 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (GameManager.Instance.state == GameState.LevelComplete)
+        {
+            StartCoroutine(StopPlayerAnimation(1.0f));
+        }
+
 
     }
+
+    IEnumerator StopPlayerAnimation(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        playerAnimator.SetBool("isWalking", false);
+    }
+
     public void ResetPlayerPosition(float x, float y)
     {
         player.position = new Vector2(x,y);
