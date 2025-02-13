@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Fire : Item
 {
@@ -22,6 +23,16 @@ public class Fire : Item
     void Update()
     {
         
+    }
+    public override void placeItem(Vector2 pos)
+    {
+        base.placeItem(pos);
+        GridManager.instance.getTileAtPos(pos).setWalkable(true);
+    }
+    public override void remove()
+    {
+        base.remove();
+        GridManager.instance.getTileAtPos(this.transform.position).setWalkable(false);
     }
 
     public override void interact(int interaction)
