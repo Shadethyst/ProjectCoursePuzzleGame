@@ -27,19 +27,20 @@ public class Fire : Item
     public override void placeItem(Vector2 pos)
     {
         base.placeItem(pos);
-        GridManager.instance.getTileAtPos(pos).setWalkable(true);
+        GridManager.instance.getTileAtPos(pos).setWalkable(false);
     }
     public override void remove()
     {
         base.remove();
-        GridManager.instance.getTileAtPos(this.transform.position).setWalkable(false);
+        GridManager.instance.getTileAtPos(this.transform.position).setWalkable(true);
     }
 
     public override void interact(int interaction)
     {
         base.interact(interaction);
-        if (interaction == 5 || interaction == 2)
+        if (interaction == 5 || interaction == 2 || interaction == 1)
         {
+            Debug.Log("Interaction with " + interaction);
             remove();
         }
     }
