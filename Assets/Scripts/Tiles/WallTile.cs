@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class WallTile : Tile
 {
-    private void Start()
+    void Start()
     {
-        _isWalkable = false;
-        _isPlacable = false;
-        _isFlowable = false;
+
+    }
+    protected override void setStartStates()
+    {
+        defaultWalkState = false;
+        defaultPlacableState = false;
+        defaultFlowableState = false;
+        base.setStartStates();
     }
 
     // Update is called once per frame
