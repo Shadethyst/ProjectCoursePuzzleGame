@@ -50,11 +50,11 @@ public class Water : Item
     {
         if (GridManager.instance.getTileAtPos(pos).getItem(id) != false)
         {
-            Debug.Log("there is water in the spot!");
+            
         }
         /// add this check to playercontroller instead!!
         else {
-            Debug.Log("placing item");
+            
             var spawnedItem = Instantiate(this, pos, Quaternion.identity);
 
             Tile tile = GridManager.instance.getTileAtPos(pos);
