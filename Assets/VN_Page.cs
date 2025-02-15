@@ -20,7 +20,8 @@ public class VN_Page : MonoBehaviour
     private bool readyForPageTurn;
     private bool buttonHasBeenClicked;
     private bool fadingIn;
-    [SerializeField] private bool hasTransition;
+    [SerializeField] private bool hasFadeIn;
+    [SerializeField] private bool specialFadeOut;
     private bool isPageTurned;
 
     void Awake()
@@ -37,6 +38,11 @@ public class VN_Page : MonoBehaviour
         nextButton = pageCanvas.transform.GetChild(5).gameObject;
         canvasElements = this.transform.GetChild(0).GetComponent<CanvasGroup>();
         fadingIn = false;
+
+        if (specialFadeOut)
+        {
+            automaticalTurn = true;
+        }
     }
 
     private void Start()
@@ -46,7 +52,7 @@ public class VN_Page : MonoBehaviour
         {
             canvasElements.gameObject.SetActive(false);
         }
-        if (pageNumber == 0 && !hasTransition)
+        if (pageNumber == 0 && !hasFadeIn)
         {
             canvasElements.alpha = 1;
         }
@@ -64,16 +70,16 @@ public class VN_Page : MonoBehaviour
             nextButton.SetActive(true);
         }
 
-        if (fadingIn)
+        if (fadingIn && !specialFadeOut)
         {
-            if (hasTransition)
+            if (hasFadeIn)
             {
                 if (canvasElements.alpha < 1.0f)
                 {
                     canvasElements.alpha += Time.deltaTime;
                 }
             }
-            if (!hasTransition)
+            if (!hasFadeIn)
             {
                canvasElements.alpha = 1.0f;
             }
@@ -84,11 +90,28 @@ public class VN_Page : MonoBehaviour
                 isPageTurned = true;
             }
         }
+
+        if (specialFadeOut)
+        {
+            if (canvasElements.alpha > 0.0f)
+            {
+                canvasElements.alpha -= Time.deltaTime;
+            }
+            if (canvasElements.alpha == 0.0f)
+            {
+                isPageTurned = true;
+            }
+        }
     }
 
     public GameObject GetPageCanvas()
     {
         return this.pageCanvas;
+    }
+
+    public int GetPageNumber()
+    {
+        return this.pageNumber;
     }
 
     public GameObject GetBackgroundImage()
@@ -155,8 +178,15 @@ public class VN_Page : MonoBehaviour
     public void ActivatePage()
     {
         canvasElements.gameObject.SetActive(true);
-        canvasElements.alpha = 0;
-        fadingIn = true;
+        if (specialFadeOut)
+        {
+            canvasElements.alpha = 1.0f;
+        }
+        else
+        {
+            canvasElements.alpha = 0;
+            fadingIn = true;
+        }
     }
     public void DeactivatePage()
     {

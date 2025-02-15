@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
+            case GameState.Story:
+                StoryManager.instance.PlayScene();
+                break;
             case GameState.GenerateLevel:
                 GridManager.instance.generatePuzzle(GridManager.instance.getVariant());
                 break;
@@ -109,6 +112,7 @@ public class GameManager : MonoBehaviour
 
 public enum GameState
 {
+    Story,
     GenerateLevel,
     WaitForInput,
     Movement,

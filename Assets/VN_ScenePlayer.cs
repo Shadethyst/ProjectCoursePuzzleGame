@@ -23,47 +23,47 @@ public class VisualNovelPlayer : MonoBehaviour
         currentPage = 0;
         pages = vnPages.Length;
         vnPages[currentPage].ActivatePage();
-
         readyToChangePages = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
-        if ((start && currentPage == 0) || vnPages[currentPage].GetAutomaticalTurn())
+        if (GameManager.Instance.state == GameState.Story || SceneManager.GetActiveScene().name == "Story_Intro")
         {
-            if (!readyToChangePages)
+            if ((start && currentPage == 0) || vnPages[currentPage].GetAutomaticalTurn())
             {
-                readyToChangePages = true;
-                StartCoroutine(AutomaticPageTurn());
+                if (!readyToChangePages)
+                {
+                    readyToChangePages = true;
+                    StartCoroutine(AutomaticPageTurn());
+                }
             }
-        }
-        if (PageTurningAttempted() && readyToChangePages && vnPages[currentPage].GetReadyForPageTurn() && currentPage < vnPages.Length - 1 && !vnPages[currentPage].GetAutomaticalTurn())
-        {
-            readyToChangePages = false;
-            TurnPage();
-        }
-        else if (PageTurningAttempted() && readyToChangePages && currentPage > vnPages.Length - 1)
-        {
-            completed = true;
-        }
-
-        if (completed && SceneManager.GetActiveScene().name == "Story_Intro")
-        {
-            SceneManager.LoadScene(2);
-        }
-        else if (completed && SceneManager.GetActiveScene().name != "Story_Intro")
-        {
-            this.gameObject.SetActive(false);
-        }
-
-
-        if (vnPages[currentPage].GetIsPageTurned())
-        {
-            if (currentPage > 0)
+            if (PageTurningAttempted() && readyToChangePages && vnPages[currentPage].GetReadyForPageTurn() && currentPage < vnPages.Length - 1 && !vnPages[currentPage].GetAutomaticalTurn())
             {
-                vnPages[currentPage - 1].DeactivatePage();
+                readyToChangePages = false;
+                TurnPage();
+            }
+            else if ((PageTurningAttempted() && readyToChangePages && currentPage > vnPages.Length - 1))
+            {
+                completed = true;
+            }
+
+            if (completed && SceneManager.GetActiveScene().name == "Story_Intro")
+            {
+                SceneManager.LoadScene(2);
+            }
+            else if (completed && SceneManager.GetActiveScene().name != "Story_Intro")
+            {
+                this.gameObject.SetActive(false);
+                GameManager.Instance.UpdateGameState(GameState.WaitForInput);
+            }
+            if (vnPages[currentPage].GetIsPageTurned())
+            {
+                if (currentPage > 0)
+                {
+                    vnPages[currentPage - 1].DeactivatePage();
+                }
             }
         }
     }
