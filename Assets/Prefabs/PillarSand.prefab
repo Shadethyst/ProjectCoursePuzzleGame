@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: ea637aad7dd934947912932a96844981, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -355,13 +355,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8877713730036316515}
   _highlight: {fileID: 7910425170201498277}
-  _isWalkable: 0
-  _isPlacable: 0
-  _isAdjacent: 0
-  _adjacentMaterial: {fileID: 0}
-  _nonAdjacentMaterial: {fileID: 0}
   occupiedUnit: {fileID: 0}
   tilemap: {fileID: 0}
+  _isWalkable: 0
+  _isPlacable: 0
+  _isFlowable: 0
   blockingItem: {fileID: 0}
 --- !u!1 &8595558527263936947
 GameObject:
@@ -435,7 +433,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: d08a9cf309fa4ff448c23d1bc7c7cce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

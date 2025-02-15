@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
             instance = this;
             unit = GetComponent<Unit>();
             chosenItem = inventory[itemSelectionCounter];
+            InventoryGUI.instance.SetImage(chosenItem);
         } 
         catch
         {
@@ -174,6 +175,7 @@ public class PlayerController : MonoBehaviour
             }
 
             chosenItem = inventory[itemSelectionCounter];
+            InventoryGUI.instance.SetImage(chosenItem);
         }
     }
 
