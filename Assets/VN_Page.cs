@@ -97,7 +97,7 @@ public class VN_Page : MonoBehaviour
             {
                 canvasElements.alpha -= Time.deltaTime;
             }
-            if (canvasElements.alpha == 0.0f)
+            if (canvasElements.alpha < 0.5f)
             {
                 isPageTurned = true;
             }
@@ -190,7 +190,6 @@ public class VN_Page : MonoBehaviour
     }
     public void DeactivatePage()
     {
-        Debug.Log(this + " is deleted");
         this.gameObject.SetActive(false);
     }
 }

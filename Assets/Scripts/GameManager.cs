@@ -12,16 +12,20 @@ public class GameManager : MonoBehaviour
     private int movementDone;
     private int interactionDone;
     private int interactors;
+    private int storySceneNumber;
+
+    [SerializeField] private StoryManager storyManager;
 
     private void Awake()
     {
         Instance = this;
         movementDone = 0;
         movers = 0;
+        storySceneNumber = 0;
     }
     private void Start()
     {
-        UpdateGameState(GameState.GenerateLevel);
+        UpdateGameState(GameState.Story);
     }
     private IEnumerator minTurnDuration(GameState state)
     {
@@ -60,7 +64,8 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.Story:
-                StoryManager.instance.PlayScene();
+                storyManager.PlayScene(storySceneNumber);
+                storySceneNumber++;
                 break;
             case GameState.GenerateLevel:
                 GridManager.instance.generatePuzzle(GridManager.instance.getVariant());

@@ -22,10 +22,8 @@ public class StoryItem : Item
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(PlayerController.instance.transform.position + " vs. " + this.transform.position);
         if (this.transform.position == PlayerController.instance.transform.position && !played)
         {
-            Debug.Log("works");
             played = true;
             GameManager.Instance.UpdateGameState(GameState.Story);
         }

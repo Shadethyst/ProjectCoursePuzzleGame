@@ -24,14 +24,7 @@ public class InventoryGUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.state == GameState.Story)
-        {
-            this.gameObject.SetActive(false);
-        }
-        else
-        {
-            this.gameObject.SetActive(true);
-        }
+       
     }
 
     public void SetImage(Item item)
