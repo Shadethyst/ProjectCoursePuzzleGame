@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
             if (player.position == nextTile.transform.position)
             {
                 playerAnimator.SetBool("isWalking", false);
+                player.position = nextTile.transform.position;
                 occupiedTile = nextTile;
                 unit.SetOccupiedTile(occupiedTile);
                 nextTile = null;

@@ -32,13 +32,17 @@ public class Fire : Item
     public override void remove()
     {
         base.remove();
-        GridManager.instance.getTileAtPos(this.transform.position).setWalkable(true);
     }
 
     public override void interact(int interaction)
     {
         base.interact(interaction);
-        if (interaction == 5 || interaction == 2 || interaction == 1)
+        if(interaction == 1 || interaction == 2)
+        {
+            remove();
+            GridManager.instance.getTileAtPos(this.transform.position).setDefaultWalkableState();
+        }
+        if (interaction == 5)
         {
             Debug.Log("Interaction with " + interaction);
             remove();

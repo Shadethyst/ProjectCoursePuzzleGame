@@ -8,21 +8,27 @@ public abstract class Tile : MonoBehaviour
 {
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected GameObject _highlight;
-    [SerializeField] protected bool _isWalkable;
-    [SerializeField] protected bool _isPlacable;
-    [SerializeField] protected bool _isAdjacent;
-    [SerializeField] protected bool _isFlowable;
-    private bool walkableItem;
-    [SerializeField] protected Material _adjacentMaterial;
-    [SerializeField] protected Material _nonAdjacentMaterial;
     public PlayerController occupiedUnit;
     public Tilemap tilemap;
+
+
+    [SerializeField] protected bool _isWalkable;
+    [SerializeField] protected bool _isPlacable;
+    [SerializeField] protected bool _isFlowable;
+
+    protected bool defaultWalkState;
+    protected bool defaultPlacableState;
+    protected bool defaultFlowableState;
+
+
     public Item blockingItem;
+    
     private bool[] items;
+    
     protected Vector2 Coords;
 
     public bool Placable => _isPlacable;
-    public bool Walkable => (_isWalkable || walkableItem) && blockingItem == null;
+    public bool Walkable => (_isWalkable) && blockingItem == null;
     public bool Flowable => _isFlowable;
    /* public virtual void Init(int x, int y)
     {
@@ -96,7 +102,13 @@ public abstract class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        setStartStates();
+    }
+    protected virtual void setStartStates()
+    {
+        _isWalkable = defaultWalkState;
+        _isPlacable = defaultPlacableState;
+        _isFlowable = defaultFlowableState;
     }
 
     // Update is called once per frame
@@ -109,21 +121,32 @@ public abstract class Tile : MonoBehaviour
         Vector3 position3D = tilemap.WorldToCell(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
         return (Vector2)position3D;
     }
-    public bool getAdjacent()
-    {
-        return _isAdjacent;
-    }
-    public void setAdjacent(bool adjacent) {
-    _isAdjacent = adjacent;
-    }
     public void setWalkable(bool value)
     {
-        walkableItem = value;
+        _isWalkable = value;
     }
     public bool getWalkable()
     {
-        return walkableItem;
+        return _isWalkable;
     }
+    /*
+     setters for default states of the tile,
+    set the state of walkability, placability and flowability
+    to the state that is defined as default for the tile
+     */
+    public void setDefaultWalkableState()
+    {
+        _isWalkable = defaultWalkState;
+    }
+    public void setDefaultPlacableState()
+    {
+        _isPlacable= defaultPlacableState;
+    }
+    public void setDefaultFlowableState()
+    {
+        _isFlowable= defaultFlowableState;
+    }
+
     public void addItem(int id)
     {
         items[id] = true;
