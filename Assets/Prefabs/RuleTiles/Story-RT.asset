@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: GroundWithFire
+  m_Name: Story-RT
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 8663030456985219584, guid: f5da22a1d1488a24ba79cdd52b2e7ab0, type: 3}
-  m_DefaultColliderType: 1
+  m_DefaultSprite: {fileID: 21300000, guid: f7db0d8c3c9a5bf44b9278b0a768402f, type: 3}
+  m_DefaultGameObject: {fileID: 8663030456985219584, guid: 3ac4b04bc9d28ca4884774c372607de5, type: 3}
+  m_DefaultColliderType: 0
   m_TilingRules: []

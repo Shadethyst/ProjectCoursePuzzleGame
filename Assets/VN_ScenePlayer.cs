@@ -23,14 +23,17 @@ public class VisualNovelPlayer : MonoBehaviour
         currentPage = 0;
         pages = vnPages.Length;
         vnPages[currentPage].ActivatePage();
-
         readyToChangePages = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
+        if (!completed)
+        {
+            InventoryGUI.instance.gameObject.SetActive(false);
+        }
+
         if ((start && currentPage == 0) || vnPages[currentPage].GetAutomaticalTurn())
         {
             if (!readyToChangePages)
@@ -44,7 +47,7 @@ public class VisualNovelPlayer : MonoBehaviour
             readyToChangePages = false;
             TurnPage();
         }
-        else if (PageTurningAttempted() && readyToChangePages && currentPage > vnPages.Length - 1)
+        else if ((PageTurningAttempted() && readyToChangePages && currentPage > vnPages.Length - 1))
         {
             completed = true;
         }
@@ -53,11 +56,13 @@ public class VisualNovelPlayer : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
+
         else if (completed && SceneManager.GetActiveScene().name != "Story_Intro")
         {
             this.gameObject.SetActive(false);
+            InventoryGUI.instance.gameObject.SetActive(true);
+            GameManager.Instance.UpdateGameState(GameState.WaitForInput);
         }
-
 
         if (vnPages[currentPage].GetIsPageTurned())
         {
@@ -65,6 +70,11 @@ public class VisualNovelPlayer : MonoBehaviour
             {
                 vnPages[currentPage - 1].DeactivatePage();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            completed = true;
         }
     }
 
@@ -83,13 +93,14 @@ public class VisualNovelPlayer : MonoBehaviour
 
     IEnumerator AutomaticPageTurn()
     {
-        yield return new WaitForSeconds(3);
         if (currentPage < vnPages.Length - 1)
         {
+            yield return new WaitForSeconds(3);
             TurnPage();
         }
         else
         {
+            yield return new WaitForSeconds(1.3f);
             completed = true;
         }
     }
