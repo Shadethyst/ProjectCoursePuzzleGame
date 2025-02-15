@@ -20,7 +20,7 @@ public class Earth : Item
         /// add this check to playercontroller instead!!
         if (GridManager.instance.getTileAtPos(pos).getItem(id) == false)
         {
-            Debug.Log("placing item" + this);
+            
             base.placeItem(pos);
             GridManager.instance.getTileAtPos(pos).addItem(id);
         }

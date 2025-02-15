@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private InputAction browseLeft;
     private InputAction browseRight;
     private InputAction interact;
+    private InputAction stay;
 
     private GridManager gridManager;
     private GameManager gameManager;
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
             interact = playerInput.actions.FindAction("Interact");
             browseLeft = playerInput.actions.FindAction("BrowseLeft");
             browseRight = playerInput.actions.FindAction("BrowseRight");
+            stay = playerInput.actions.FindAction("StayInPlace");
             instance = this;
             unit = GetComponent<Unit>();
             chosenItem = inventory[itemSelectionCounter];
@@ -234,6 +236,13 @@ public class PlayerController : MonoBehaviour
 
         }
 
+    }
+    public void handleStayInPlace(InputAction.CallbackContext context)
+    {
+        if(context.performed && context.action.id == stay.id && GameManager.Instance.state == GameState.WaitForInput)
+        {
+            GameManager.Instance.UpdateGameState(GameState.ItemMovement);
+        }
     }
     public void movePlayer()
     {

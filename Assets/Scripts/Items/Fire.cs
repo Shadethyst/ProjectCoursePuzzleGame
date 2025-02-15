@@ -44,7 +44,6 @@ public class Fire : Item
         }
         if (interaction == 5)
         {
-            Debug.Log("Interaction with " + interaction);
             remove();
         }
     }
