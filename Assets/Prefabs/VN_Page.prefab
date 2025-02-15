@@ -577,6 +577,7 @@ GameObject:
   - component: {fileID: 5599236906981129935}
   - component: {fileID: 672604710436963199}
   - component: {fileID: 5323771380282450344}
+  - component: {fileID: 3979979683879392160}
   m_Layer: 0
   m_Name: VNPageCanvas
   m_TagString: Untagged
@@ -672,6 +673,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &3979979683879392160
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963730096368208398}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!1 &5026970413877988396
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94676f5e69018194395c4c9fbe4d24ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pageNumber: 0
   automaticalTurn: 0
 --- !u!1 &6430771896663743176
 GameObject:
