@@ -105,9 +105,8 @@ public class Water : Item
 
         if (nextTile && nextTile.Flowable)
         {
-            gameObject.transform.position = nextTile.transform.position;
-            Debug.Log("old tile water state: " + GridManager.instance.getTileAtPos(this.transform.position).getItem(id));
             GridManager.instance.getTileAtPos(this.transform.position).removeItem(id);
+            gameObject.transform.position = nextTile.transform.position;
             nextTile.addItem(id);
             Debug.Log(nextTile.getItem(id));
         }

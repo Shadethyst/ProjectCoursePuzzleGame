@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class GroundTile : Tile
 {
-    private void Start()
+    void Start()
     {
-        _isWalkable = true;
-        _isPlacable = true;
-        _isFlowable = true;
+        setStartStates();
+    }
+    protected override void setStartStates()
+    {
+        defaultWalkState = true;
+        defaultPlacableState = true;
+        defaultFlowableState = true;
+        base.setStartStates();
     }
 
 }
