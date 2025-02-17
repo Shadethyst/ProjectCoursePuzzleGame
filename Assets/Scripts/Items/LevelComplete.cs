@@ -7,7 +7,7 @@ public class LevelComplete : Item
 
     private void Awake()
     {
-        id = 7;
+        id = Id.LEVEL_COMPLETE;
         range = 0;
     }
 

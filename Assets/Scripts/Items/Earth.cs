@@ -7,7 +7,7 @@ public class Earth : Item
     [SerializeField] protected Mud mud;
     private void Awake()
     {
-        id = 2;
+        id = Id.EARTH;
         GameManager.Instance.changeInteractor(1);
     }
     // Start is called before the first frame update
@@ -17,12 +17,13 @@ public class Earth : Item
     }
     public override void placeItem(Vector2 pos)
     {
+        Tile tile = GridManager.instance.getTileAtPos(pos);
         /// add this check to playercontroller instead!!
-        if (GridManager.instance.getTileAtPos(pos).getItem(id) == false)
+        if (tile.getItem(id) == false)
         {
-            
             base.placeItem(pos);
-            GridManager.instance.getTileAtPos(pos).addItem(id);
+            tile.addItem(id);
+            tile.setWalkable(false);
         }
     }
 
@@ -31,15 +32,16 @@ public class Earth : Item
     {
         
     }
-    public override void interact(int interaction)
+    public override void Interact(Id other)
     {
-        base.interact(interaction);
-        if(interaction == 1)
+        base.Interact(other);
+        // TODO earth(2) interacts with water(1) and fire(3), should interact up only
+        if(other == Id.WATER)
         {
             remove();
             mud.placeItem(this.transform.position);
         }
-        if(interaction == 3)
+        if(other == Id.FIRE)
         {
             remove();
         }

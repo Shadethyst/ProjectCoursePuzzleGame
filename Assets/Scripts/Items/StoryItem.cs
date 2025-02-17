@@ -8,7 +8,7 @@ public class StoryItem : Item
 
     private void Awake()
     {
-        id = 8;
+        id = Id.STORY_ITEM;
         range = 0;
         played = false;
     }

@@ -13,7 +13,7 @@ public class Fire : Item
     }
     private void Awake()
     {
-        id = 3;
+        id = Id.FIRE;
         range = 1;
         transformElement = new Brick();
         GameManager.Instance.changeInteractor(1);
@@ -34,15 +34,15 @@ public class Fire : Item
         base.remove();
     }
 
-    public override void interact(int interaction)
+    public override void Interact(Id other)
     {
-        base.interact(interaction);
-        if(interaction == 1 || interaction == 2)
+        base.Interact(other);
+        if(other == Id.WATER || other == Id.EARTH)
         {
             remove();
             GridManager.instance.getTileAtPos(this.transform.position).setDefaultWalkableState();
         }
-        if (interaction == 5)
+        if (other == Id.MUD)
         {
             remove();
         }
