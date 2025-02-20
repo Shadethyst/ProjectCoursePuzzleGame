@@ -13,7 +13,7 @@ public class Air : Item
     }
     private void Awake()
     {
-        id = 4;
+        id = Id.AIR;
         range = 1;
         GameManager.Instance.changeInteractor(1);
     }
@@ -23,8 +23,8 @@ public class Air : Item
     {
         
     }
-    public override void interact(int interaction)
+    public override void Interact(Id other)
     {
-        base.interact(interaction);
+        base.Interact(other);
     }
 }
