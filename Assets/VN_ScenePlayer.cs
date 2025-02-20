@@ -31,7 +31,10 @@ public class VisualNovelPlayer : MonoBehaviour
     {
         if (!completed)
         {
-            InventoryGUI.instance.gameObject.SetActive(false);
+            if (InventoryGUI.instance)
+            {
+                InventoryGUI.instance.gameObject.SetActive(false);
+            }
         }
 
         if ((start && currentPage == 0) || vnPages[currentPage].GetAutomaticalTurn())
