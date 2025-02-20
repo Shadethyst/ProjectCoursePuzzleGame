@@ -14,7 +14,7 @@ public class Water : Item
     // Start is called before the first frame update
     void Start()
     {
-        id = 1;
+        id = Id.WATER;
         range = 1;
         GameManager.Instance.changeInteractor(1);
         _itemCollider = GetComponent<Collider2D>();
@@ -72,18 +72,17 @@ public class Water : Item
             canMove = false;
         }
     }
-    public override void interact(int interaction)
+    public override void Interact(Id other)
     {
-        
-        if (interaction == 2)
+        if (other == Id.EARTH)
         {
             transformInto(transformElement);
         }
-        if(interaction == 3)
+        if(other == Id.FIRE)
         {
             remove();
         }
-        base.interact(interaction);
+        base.Interact(other);
     }
     /*
      * spawns new element based on the specified change Item,

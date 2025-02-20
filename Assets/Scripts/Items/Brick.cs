@@ -12,7 +12,7 @@ public class Brick : Item
     }
     private void Awake()
     {
-        id = 6;
+        id = Id.BRICK;
 
         GameManager.Instance.changeInteractor(1);
     }
@@ -32,8 +32,8 @@ public class Brick : Item
     {
         
     }
-    public override void interact(int interaction)
+    public override void Interact(Id other)
     {
-        base.interact(interaction);
+        base.Interact(other);
     }
 }

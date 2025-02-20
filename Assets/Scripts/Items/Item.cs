@@ -6,11 +6,23 @@ using UnityEngine.UIElements;
 
 public abstract class Item : MonoBehaviour
 {
+    public enum Id
+    {
+        NONE = 0,
+        WATER = 1,
+        EARTH = 2,
+        FIRE = 3,
+        AIR = 4,
+        MUD = 5,
+        BRICK = 6,
+        LEVEL_COMPLETE = 7,
+        STORY_ITEM = 8,
+    }
 
     /// placement range for the Item, default range is 1
     [SerializeField] protected int range;
     /// id of the Item for placing and finding on a tile
-    [SerializeField] protected int id;
+    [SerializeField] protected Id id;
     protected Collider2D _itemCollider;
     protected List<Collider2D> results;
     public virtual void placeItem(Vector2 pos)
@@ -53,7 +65,7 @@ public abstract class Item : MonoBehaviour
     void Start()
     {
         range = 1;
-        id = 0;
+        id = Id.NONE;
         _itemCollider = GetComponent<Collider2D>();
 
     }
@@ -69,7 +81,7 @@ public abstract class Item : MonoBehaviour
     }
     public int getRange() {  return range; }
     public void setRange(int range) {  this.range = range; }
-    public int getId() { return id; }
+    public Id getId() { return id; }
 
     protected virtual void OnOnGameStateChanged(GameState state)
     {
@@ -90,11 +102,12 @@ public abstract class Item : MonoBehaviour
         {
             foreach (Collider2D item in results)
             {
-                if (item.gameObject.GetComponent<Item>() != null && item.gameObject.GetComponent<Item>().getId() > id)
+                Item it = item.gameObject.GetComponent<Item>();
+                if (it != null && it.id > id)
                 {
-                    Debug.Log("found interactible item! " + item.gameObject.GetComponent<Item>());
-                    item.gameObject.GetComponent<Item>().interact(id);
-                    interact(item.gameObject.GetComponent<Item>().getId());
+                    Debug.Log("found interactible item! " + it);
+                    it.Interact(id);
+                    Interact(it.id);
                 }
 
             }
@@ -104,7 +117,7 @@ public abstract class Item : MonoBehaviour
     /*
      * for now items interact upwards -> lower id has logic for how interaction happens with higher id Items
      */
-    public virtual void interact(int id)
+    public virtual void Interact(Id id)
     {
         
     }
