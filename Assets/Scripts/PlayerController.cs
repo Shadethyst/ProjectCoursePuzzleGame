@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -192,9 +193,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if(occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile &&
-                ((occupiedTile.getCoords().x == hoveredTile.getCoords().x && System.Math.Abs(hoveredTile.getCoords().y - occupiedTile.getCoords().y) <= chosenItem.getRange())
-                || (occupiedTile.getCoords().y == hoveredTile.getCoords().y && System.Math.Abs(hoveredTile.getCoords().x - occupiedTile.getCoords().x) <= chosenItem.getRange())))
+            var delta = hoveredTile.getCoords() - occupiedTile.getCoords();
+            bool inRange = (delta.x == 0 && Math.Abs(delta.y) <= chosenItem.getRange())
+                || (delta.y == 0 && Math.Abs(delta.x) <= chosenItem.getRange());
+
+            if (occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile && inRange)
             {
                 gameManager.UpdateGameState(GameState.Placement);
             }
@@ -206,23 +209,29 @@ public class PlayerController : MonoBehaviour
         {
             if(GameManager.Instance.state == GameState.WaitForInput)
             {
-                if (context.action.id == moveLeft.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x - distance, occupiedTile.getCoords().y)) != null)
+                Vector2 occupied = occupiedTile.getCoords();
+                var left = occupied - distance * Vector2.right;
+                var right = occupied + distance * Vector2.right;
+                var down = occupied - distance * Vector2.up;
+                var up = occupied + distance * Vector2.up;
+
+                if (context.action.id == moveLeft.id && gridManager.getTileAtPos(left))
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x - distance, occupiedTile.getCoords().y));
+                    nextTile = gridManager.getTileAtPos(left);
                     playerRenderer.flipX = false;
                 }
-                else if (context.action.id == moveRight.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x + distance, occupiedTile.getCoords().y)))
+                else if (context.action.id == moveRight.id && gridManager.getTileAtPos(right))
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x + distance, occupiedTile.getCoords().y));
+                    nextTile = gridManager.getTileAtPos(right);
                     playerRenderer.flipX = true;
                 }
-                else if (context.action.id == moveDown.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - distance)))
+                else if (context.action.id == moveDown.id && gridManager.getTileAtPos(down))
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - distance));
+                    nextTile = gridManager.getTileAtPos(down);
                 }
-                else if (context.action.id == moveUp.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + distance)))
+                else if (context.action.id == moveUp.id && gridManager.getTileAtPos(up))
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + distance));
+                    nextTile = gridManager.getTileAtPos(up);
                 }
 
                 if (nextTile && nextTile.Walkable)
