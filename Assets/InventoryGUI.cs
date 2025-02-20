@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class InventoryGUI : MonoBehaviour
 {
     [SerializeField] private Image itemImage;
-    [SerializeField] private Text itemCount;
+    [SerializeField] private TMP_Text itemCount;
 
     public static InventoryGUI instance;
 
@@ -21,7 +21,7 @@ public class InventoryGUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemCount.text = "#";
+        //itemCount.text = "#";
     }
 
     // Update is called once per frame
