@@ -22,6 +22,14 @@ public class StoryManager : MonoBehaviour
 
     public void PlayScene(int storySceneNumber)
     {
+        StartCoroutine(WaitBeforeStory(storySceneNumber));
+        storyScenes[storySceneNumber].SetActive(false);
+    }
+
+    IEnumerator WaitBeforeStory(int storySceneNumber)
+    {
+        storyScenes[storySceneNumber].SetActive(false);
+        yield return new WaitForSeconds(1.0f);
         storyScenes[storySceneNumber].SetActive(true);
     }
 }
