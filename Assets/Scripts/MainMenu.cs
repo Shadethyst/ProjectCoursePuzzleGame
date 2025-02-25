@@ -5,19 +5,24 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class mainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject[] listOfMenus;
-    [SerializeField] private Button[] firstButtonsOfMenus;
-    [SerializeField] private int menuId = 0;
+
+    [SerializeField] private GameObject mainMenuBase;
+    [SerializeField] private GameObject settingsBase;
+
+    [SerializeField] private Button[] mainMenuButtons;
+    [SerializeField] private Button[] settingsButtons;
+
     [SerializeField] private Image gameStartFadeScreen;
 
     private bool readyToChangeScenes;
 
     public void Start()
     {
-        readyToChangeScenes = false;
-        SelectedMenu(menuId);
+        mainMenuBase.SetActive(true);
+        mainMenuButtons[0].Select();
+        settingsBase.SetActive(false);
     }
 
     public void Update()
@@ -35,39 +40,23 @@ public class MainMenu : MonoBehaviour
         readyToChangeScenes = true;
     }
 
+    public void OpenSettings()
+    {
+        settingsBase.SetActive(true);
+        settingsButtons[0].Select();
+        mainMenuBase.SetActive(false);
+    }
+
+    public void CloseSettings()
+    {
+        mainMenuBase.SetActive(true);
+        mainMenuButtons[2].Select();
+        settingsBase.SetActive(false);
+    }
+
     public void OnQuitPressed()
     {
         Application.Quit();
-    }
-
-    private void SelectedMenu(int menuId)
-    {
-        foreach (GameObject menu in listOfMenus)
-        {
-            menu.SetActive(false);
-        }
-        listOfMenus[menuId].SetActive(true);
-        firstButtonsOfMenus[menuId].Select();
-    }
-
-    public void ActivateMenu(Button button)
-    {
-        if (button.name == "Settings")
-        {
-            menuId = 1;
-            StartCoroutine(PrepareForMenuChange());
-        }
-        else if (button.name == "Back")
-        {
-            menuId = 0;
-            StartCoroutine(PrepareForMenuChange());
-        }
-    }
-
-    IEnumerator PrepareForMenuChange()
-    {
-        yield return new WaitForSeconds(.2f);
-        SelectedMenu(menuId);
     }
 
     IEnumerator DoSceneTransition()

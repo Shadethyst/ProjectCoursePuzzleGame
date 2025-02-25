@@ -152,19 +152,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10.245675
+      value: 4.514714
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10.245675
+      value: 4.514714
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10.245675
+      value: 4.514714
+      objectReference: {fileID: 0}
+    - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 891417157409032553, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: pageNumber
@@ -254,6 +258,10 @@ PrefabInstance:
     - target: {fileID: 6509142154058055225, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_margin.z
       value: -442.5584
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065984541403229385, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.961914
       objectReference: {fileID: 0}
     - target: {fileID: 8513533342722568444, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_IsActive
@@ -2383,6 +2391,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyScenes:
   - {fileID: 532638423}
+--- !u!1 &411441048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2105839827558547411, guid: 2e25383cdd075df44998f821d69c9f3e, type: 3}
+  m_PrefabInstance: {fileID: 1594620526881445303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &427634828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2529,8 +2542,24 @@ PrefabInstance:
         USE THIS KNOWLEDGE TO SOLVE PUZZLES!]'
       objectReference: {fileID: 0}
     - target: {fileID: 7655418508452233886, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 253.6041
+      objectReference: {fileID: 0}
+    - target: {fileID: 7655418508452233886, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 178.003
+      value: 228.28813
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031880026902508410, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 309
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031880026902508410, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -133
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065984541403229385, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.961914
       objectReference: {fileID: 0}
     - target: {fileID: 8592001692321250084, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_Sprite
@@ -2601,7 +2630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 411441048}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &542643674
@@ -2764,6 +2793,10 @@ PrefabInstance:
       value: '- ADD MULTIPLE ELEMENTS ON THE SAME TILE TO CAUSE A CHEMICAL REACTION.
         TRY DIFFERENT COMBINATIONS TO SOLVE PUZZLES AND TO MOVE FORWARD'
       objectReference: {fileID: 0}
+    - target: {fileID: 8065984541403229385, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.961914
+      objectReference: {fileID: 0}
     - target: {fileID: 8592001692321250084, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2792,19 +2825,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10.245675
+      value: 4.514714
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10.245675
+      value: 4.514714
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10.245675
+      value: 4.514714
+      objectReference: {fileID: 0}
+    - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 891417157409032553, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: hasFadeIn
@@ -2897,6 +2934,10 @@ PrefabInstance:
         And I know
         just the place!'
       objectReference: {fileID: 0}
+    - target: {fileID: 8065984541403229385, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.961914
+      objectReference: {fileID: 0}
     - target: {fileID: 8592001692321250084, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2920,19 +2961,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10.245675
+      value: 4.514714
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10.245675
+      value: 4.514714
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10.245675
+      value: 4.514714
+      objectReference: {fileID: 0}
+    - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 891417157409032553, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: pageNumber
@@ -3018,6 +3063,10 @@ PrefabInstance:
     - target: {fileID: 6509142154058055225, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_margin.z
       value: -408.487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065984541403229385, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.961914
       objectReference: {fileID: 0}
     - target: {fileID: 8592001692321250084, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_Sprite
@@ -3269,6 +3318,10 @@ PrefabInstance:
       propertyPath: m_text
       value: '- ADD MULTIPLE ELEMENTS ON THE SAME TILE TO CAUSE A CHEMICAL REACTION.
         TRY DIFFERENT COMBINATIONS TO SOLVE PUZZLES AND TO MOVE FORWARD'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065984541403229385, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.961914
       objectReference: {fileID: 0}
     - target: {fileID: 8592001692321250084, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_Sprite
@@ -3812,6 +3865,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8065984541403229385, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.961914
+      objectReference: {fileID: 0}
     - target: {fileID: 8592001692321250084, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3908,7 +3965,7 @@ Transform:
   m_GameObject: {fileID: 1435609958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6131973, y: 2.4777737, z: -11}
+  m_LocalPosition: {x: -3.6101646, y: 2.4777715, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4142,6 +4199,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4963730096368208398, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5026970413877988396, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4172,8 +4233,24 @@ PrefabInstance:
         [PLACE THE ELEMENT ON A NEARBY TILE BY MOUSE]'
       objectReference: {fileID: 0}
     - target: {fileID: 7655418508452233886, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 253.6041
+      objectReference: {fileID: 0}
+    - target: {fileID: 7655418508452233886, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 178.003
+      value: 228.28813
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031880026902508410, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 309
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031880026902508410, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -133
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065984541403229385, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.961914
       objectReference: {fileID: 0}
     - target: {fileID: 8592001692321250084, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_Sprite
@@ -4440,6 +4517,10 @@ PrefabInstance:
     - target: {fileID: 3847296054616962213, guid: 2e25383cdd075df44998f821d69c9f3e, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847296054616962213, guid: 2e25383cdd075df44998f821d69c9f3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5033004115159325318, guid: 2e25383cdd075df44998f821d69c9f3e, type: 3}
       propertyPath: m_AnchorMax.y
