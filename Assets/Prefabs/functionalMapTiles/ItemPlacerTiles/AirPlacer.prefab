@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AirPlacer
       objectReference: {fileID: 0}
+    - target: {fileID: 3962048713745714827, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7841447428200730827, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
     - {fileID: 8706690563705943995, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
