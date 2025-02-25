@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: Pillar-RT
+  m_Name: Pathcorner
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: a16332d6605ce8943878645a984f27b1, type: 3}
-  m_DefaultGameObject: {fileID: 8497601773409415959, guid: 24b9456eac8d9d24d8ecb4c0dd174ff9, type: 3}
-  m_DefaultColliderType: 0
+  m_DefaultSprite: {fileID: 21300000, guid: d415208330e9847d9b44a36cfe255cda, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
   m_TilingRules: []
