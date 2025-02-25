@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Ground-RT
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: cbcf985542c40584eb3ac3b8e06b11f6, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: ed953c884db15495bb2bef350b780724, type: 3}
   m_DefaultGameObject: {fileID: 3962048713745714827, guid: 7342d14a74fa2df48a952bf62c5a794d, type: 3}
   m_DefaultColliderType: 0
   m_TilingRules: []
