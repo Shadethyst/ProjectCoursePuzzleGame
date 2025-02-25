@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,7 +11,15 @@ public class PauseMenu : MonoBehaviour
     public static PauseMenu Instance;
 
     [SerializeField] private GameObject pauseMenuBase;
-    [SerializeField] private GameObject exitToMenuConfirm;
+    [SerializeField] private GameObject settingsBase;
+    [SerializeField] private GameObject returnToMenuBase;
+
+    // These buttons are used to make sure that they are focused automatically
+    // when the correct menu page is activated (so that they can be navigated by keyboard)
+    [SerializeField] private Button[] pauseMenuButtons;
+    [SerializeField] private Button[] settingsButtons;
+    [SerializeField] private Button[] returnToMenuButtons;
+    
     [SerializeField] private GameObject itemCanvas;
 
     private bool isPaused = false;
@@ -21,7 +30,8 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         pauseMenuBase.SetActive(false);
-        exitToMenuConfirm.SetActive(false);
+        settingsBase.SetActive(false);
+        returnToMenuBase.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,7 +41,9 @@ public class PauseMenu : MonoBehaviour
         {
             isPaused = !isPaused;
             pauseMenuBase.SetActive(isPaused);
-            exitToMenuConfirm.SetActive(false);
+            pauseMenuButtons[0].Select();
+            returnToMenuBase.SetActive(false);
+            settingsBase.SetActive(false);
 
             if (isPaused)
             {
@@ -65,16 +77,33 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void OpenSettings()
+    {
+        settingsBase.SetActive(true);
+        settingsButtons[0].Select();
+        pauseMenuBase.SetActive(false);
+        returnToMenuBase.SetActive(false);
+    }
+
+    public void CloseSettings()
+    {
+        pauseMenuBase.SetActive(true);
+        pauseMenuButtons[1].Select();
+        settingsBase.SetActive(false);
+    }
+
     public void ReturnToMainMenu()
     {
-        exitToMenuConfirm.SetActive(true);
+        returnToMenuBase.SetActive(true);
+        returnToMenuButtons[0].Select();
         pauseMenuBase.SetActive(false);
     }
 
     public void NoReturnToMenu()
     {
         pauseMenuBase.SetActive(true);
-        exitToMenuConfirm.SetActive(false);
+        pauseMenuButtons[2].Select();
+        returnToMenuBase.SetActive(false);
     }
 
     public void YesReturnToMenu()
@@ -85,5 +114,10 @@ public class PauseMenu : MonoBehaviour
     public bool GetIsPaused()
     {
         return this.isPaused;
+    }
+
+    public void ResetLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
