@@ -1,13 +1,7 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
-
-
 
 /* PlayerController
  * 
@@ -19,7 +13,18 @@ using UnityEngine.Tilemaps;
  */
 public class PlayerController : MonoBehaviour
 {
+    [Serializable]
+    public struct InventoryItem
+    {
+        public Item item;
+        public int count;
+    }
+
     public static PlayerController instance;
+
+    [SerializeField] protected int chosenItemIndex = 0;
+    [SerializeField] protected InventoryItem[] inventory;
+
     private PlayerInput playerInput;
     private Animator playerAnimator;
     private Transform player;
@@ -38,10 +43,7 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
     private Unit unit;
     private GameState currentGameState;
-    [SerializeField] protected Item chosenItem;
-    [SerializeField] protected Item[] inventory;
-    private int itemSelectionCounter = 0;
-
+    
     private Tile occupiedTile;
     private Tile nextTile;
     private Tile hoveredTile;
@@ -72,13 +74,19 @@ public class PlayerController : MonoBehaviour
             stay = playerInput.actions.FindAction("StayInPlace");
             instance = this;
             unit = GetComponent<Unit>();
-            chosenItem = inventory[itemSelectionCounter];
-            InventoryGUI.instance.SetImage(chosenItem);
+            
+            InventoryGUI.instance.SetImage(getChosenItem().item);
+            InventoryGUI.instance.SetCount(getChosenItem().count);
         } 
         catch
         {
             Debug.Log("Initialization not completed");
         }
+    }
+
+    public InventoryItem getChosenItem()
+    {
+        return inventory[chosenItemIndex];
     }
 
 
@@ -144,40 +152,36 @@ public class PlayerController : MonoBehaviour
     {
         occupiedTile = tile;
     }
-    public Item getChosenItem()
-    {
-        return chosenItem;
-    }
-
+   
     public void handleItemBrowsing(InputAction.CallbackContext context)
     {
         if (context.performed) 
         {
             if (context.action.id == browseLeft.id)
             {
-                if (itemSelectionCounter == 0)
+                if (chosenItemIndex == 0)
                 {
-                    itemSelectionCounter = inventory.Length - 1;
+                    chosenItemIndex = inventory.Length - 1;
                 }
                 else
                 {
-                    itemSelectionCounter--;
+                    chosenItemIndex--;
                 }
             }
             else if (context.action.id == browseRight.id)
             {
-                if (itemSelectionCounter == inventory.Length - 1)
+                if (chosenItemIndex == inventory.Length - 1)
                 {
-                    itemSelectionCounter = 0;
+                    chosenItemIndex = 0;
                 }
                 else
                 {
-                    itemSelectionCounter++;
+                    chosenItemIndex++;
                 }
             }
 
-            chosenItem = inventory[itemSelectionCounter];
-            InventoryGUI.instance.SetImage(chosenItem);
+            InventoryGUI.instance.SetImage(getChosenItem().item);
+            InventoryGUI.instance.SetCount(getChosenItem().count);
         }
     }
 
@@ -192,9 +196,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if(occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile &&
-                ((occupiedTile.getCoords().x == hoveredTile.getCoords().x && System.Math.Abs(hoveredTile.getCoords().y - occupiedTile.getCoords().y) <= chosenItem.getRange())
-                || (occupiedTile.getCoords().y == hoveredTile.getCoords().y && System.Math.Abs(hoveredTile.getCoords().x - occupiedTile.getCoords().x) <= chosenItem.getRange())))
+            var delta = hoveredTile.getCoords() - occupiedTile.getCoords();
+            bool inRange = (delta.x == 0 && Math.Abs(delta.y) <= getChosenItem().item.getRange())
+                || (delta.y == 0 && Math.Abs(delta.x) <= getChosenItem().item.getRange());
+
+            if (occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile && inRange)
             {
                 gameManager.UpdateGameState(GameState.Placement);
             }
@@ -206,23 +212,29 @@ public class PlayerController : MonoBehaviour
         {
             if(GameManager.Instance.state == GameState.WaitForInput)
             {
-                if (context.action.id == moveLeft.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x - distance, occupiedTile.getCoords().y)) != null)
+                Vector2 occupied = occupiedTile.getCoords();
+                var left = occupied - distance * Vector2.right;
+                var right = occupied + distance * Vector2.right;
+                var down = occupied - distance * Vector2.up;
+                var up = occupied + distance * Vector2.up;
+
+                if (context.action.id == moveLeft.id && gridManager.getTileAtPos(left))
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x - distance, occupiedTile.getCoords().y));
+                    nextTile = gridManager.getTileAtPos(left);
                     playerRenderer.flipX = false;
                 }
-                else if (context.action.id == moveRight.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x + distance, occupiedTile.getCoords().y)))
+                else if (context.action.id == moveRight.id && gridManager.getTileAtPos(right))
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x + distance, occupiedTile.getCoords().y));
+                    nextTile = gridManager.getTileAtPos(right);
                     playerRenderer.flipX = true;
                 }
-                else if (context.action.id == moveDown.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - distance)))
+                else if (context.action.id == moveDown.id && gridManager.getTileAtPos(down))
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y - distance));
+                    nextTile = gridManager.getTileAtPos(down);
                 }
-                else if (context.action.id == moveUp.id && gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + distance)))
+                else if (context.action.id == moveUp.id && gridManager.getTileAtPos(up))
                 {
-                    nextTile = gridManager.getTileAtPos(new Vector2(occupiedTile.getCoords().x, occupiedTile.getCoords().y + distance));
+                    nextTile = gridManager.getTileAtPos(up);
                 }
 
                 if (nextTile && nextTile.Walkable)
@@ -252,9 +264,20 @@ public class PlayerController : MonoBehaviour
     }
     public void placeSelected()
     {
-        chosenItem.placeItem(hoveredTile.transform.position);
-       // chosenItem.placeItem(hoveredTile.getCoords());
-        gameManager.UpdateGameState(GameState.ItemMovement);
+        var chosen = getChosenItem();
+        if(chosen.count > 0)
+        {
+            chosen.item.placeItem(hoveredTile.transform.position);
+            // update original, chosen is a copy
+            inventory[chosenItemIndex].count--;
+            Debug.Log("Placed item, left:" + inventory[chosenItemIndex].count);
+            InventoryGUI.instance.SetCount(inventory[chosenItemIndex].count);
+            gameManager.UpdateGameState(GameState.ItemMovement);
+        }
+        else
+        {
+            gameManager.UpdateGameState(GameState.WaitForInput);
+        }
     }
     public Tile getHoveredTile() { return hoveredTile; }
     public void setHoveredTile(Tile tile) {  hoveredTile = tile; }

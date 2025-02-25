@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.Story:
+                Debug.Log("Starting?");
                 storyManager.PlayScene(storySceneNumber);
                 storySceneNumber++;
                 break;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static PlayerController;
 
 public abstract class Tile : MonoBehaviour
 {
@@ -35,13 +36,21 @@ public abstract class Tile : MonoBehaviour
         items = new Item[10];
         Coords = new Vector2(x, y);
     }*/
+
+    public bool IsPlaceable()
+    {
+        Tile occupied = PlayerController.instance.getOccupiedTile();
+        InventoryItem chosen = PlayerController.instance.getChosenItem();
+        return occupied && Placable && (occupied.getCoords().x == this.getCoords().x && System.Math.Abs(this.getCoords().y - occupied.getCoords().y) <= chosen.item.getRange()
+                || (occupied.getCoords().y == this.getCoords().y && System.Math.Abs(this.getCoords().x - occupied.getCoords().x) <= chosen.item.getRange()));
+                
+    }
+
     protected virtual void OnMouseEnter()
     {
         PlayerController.instance.setHoveredTile(this);
 
-        if (PlayerController.instance.getOccupiedTile() && ((PlayerController.instance.getOccupiedTile().getCoords().x == this.getCoords().x && System.Math.Abs(this.getCoords().y - PlayerController.instance.getOccupiedTile().getCoords().y) <= PlayerController.instance.getChosenItem().getRange())
-                || (PlayerController.instance.getOccupiedTile().getCoords().y == this.getCoords().y && System.Math.Abs(this.getCoords().x - PlayerController.instance.getOccupiedTile().getCoords().x) <= PlayerController.instance.getChosenItem().getRange()))
-                && Placable)
+        if(IsPlaceable())
         {
             _highlight.GetComponent<SpriteRenderer>().color = Color.green;
         }
