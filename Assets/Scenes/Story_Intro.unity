@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 891417157409032553, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: pageNumber
@@ -507,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0
+      value: -27
       objectReference: {fileID: 0}
     - target: {fileID: 891417157409032553, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: pageNumber
@@ -1005,7 +1005,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7779892040793931, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_text
-      value: ???
+      value: HERMES
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_LocalScale.x
@@ -1025,7 +1025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0
+      value: -27
       objectReference: {fileID: 0}
     - target: {fileID: 891417157409032553, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: hasFadeIn
@@ -1137,7 +1137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6509142154058055225, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_text
-      value: '"Greetings. I am HERMES."'
+      value: '"Greetings. I am HERMES, the messenger of Gods."'
       objectReference: {fileID: 0}
     - target: {fileID: 6509142154058055225, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_fontColor.b
@@ -1227,7 +1227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 891417157409032553, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: hasFadeIn
@@ -2480,7 +2480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539722585064831509, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0
+      value: -27
       objectReference: {fileID: 0}
     - target: {fileID: 891417157409032553, guid: c6a8396cb4f258b47a447a3cc3c7c665, type: 3}
       propertyPath: hasFadeIn
