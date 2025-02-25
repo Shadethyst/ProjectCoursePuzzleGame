@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.Story:
-                Debug.Log("Starting?");
                 storyManager.PlayScene(storySceneNumber);
                 storySceneNumber++;
                 break;
@@ -91,6 +90,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Placement:
                 PlayerController.instance.placeSelected();
+                break;
+            case GameState.Pause:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -126,6 +127,7 @@ public enum GameState
     ItemMovement,
     Turn,
     LevelComplete,
-    Defeat
+    Defeat,
+    Pause
 
 }
