@@ -12,7 +12,7 @@ public class Mud : Item
     }
     private void Awake()
     {
-        id = 5;
+        id = Id.MUD;
         range = 0;
         GameManager.Instance.changeInteractor(1);
     }
@@ -31,14 +31,14 @@ public class Mud : Item
     {
         
     }
-    public override void interact(int interaction)
+    public override void Interact(Id other)
     {
-        base.interact(interaction);
-        if(interaction == 3)
+        base.Interact(other);
+        // TODO fire(3) should interact with mud(5)
+        if(other == Id.FIRE)
         {
             brick.placeItem(this.transform.position);
             remove();
-
         }
     }
 }

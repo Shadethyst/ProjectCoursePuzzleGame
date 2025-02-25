@@ -147,16 +147,16 @@ public abstract class Tile : MonoBehaviour
         _isFlowable= defaultFlowableState;
     }
 
-    public void addItem(int id)
+    public void addItem(Item.Id id)
     {
-        items[id] = true;
+        items[(int)id] = true;
     }
-    public bool getItem(int id)
+    public bool getItem(Item.Id id)
     {
-        return items[id];
+        return items[(int)id];
     }
-    public void removeItem(int id) {
-        items[id] = false;
+    public void removeItem(Item.Id id) {
+        items[(int)id] = false;
     }
     
 }
