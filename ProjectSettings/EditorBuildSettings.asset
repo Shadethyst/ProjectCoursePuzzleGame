@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameLevel.unity
     guid: 99d0c8520c0128549acf310df3c74232
+  - enabled: 1
+    path: Assets/Scenes/LassiMapDesign.unity
+    guid: b4a3f40b694810948aecbc9e0fd5b4e3
   m_configObjects: {}

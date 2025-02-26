@@ -28,7 +28,7 @@ public class SoundEffectPlayer : MonoBehaviour
         else
         {
             soundEffect.mute = false;
-            soundEffect.volume = 0.7f;
+            soundEffect.volume = 1.0f;
             soundEffect.Play();
         }
     }

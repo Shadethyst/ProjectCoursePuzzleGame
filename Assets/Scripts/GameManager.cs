@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     private int storySceneNumber;
 
     [SerializeField] private StoryManager storyManager;
+    [SerializeField] private SceneTransition sceneTransition;
 
     private void Awake()
     {
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(minTurnDuration(GameState.Turn));
                 break;
             case GameState.LevelComplete:
+                sceneTransition.SetReadyToEndScene(true);
                 break;
             case GameState.Defeat:
                 break;
