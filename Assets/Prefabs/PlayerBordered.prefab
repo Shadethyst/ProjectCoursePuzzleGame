@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2933438838845512573}
   - component: {fileID: 2969983807279730160}
   - component: {fileID: 8664785280537836402}
+  - component: {fileID: 8389869830111492280}
   m_Layer: 0
   m_Name: PlayerBordered
   m_TagString: Untagged
@@ -147,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bc3e31e19bb8e4ab2a7e5e52c22ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenItem: {fileID: 7874511235081064800, guid: b5451a3d9a2820b49abd5e19f8ee1410, type: 3}
+  chosenItemIndex: 0
+  inventory: []
 --- !u!114 &-8911653786418350011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +320,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c14a311e-85ce-4231-b533-903af02775f9
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c264c6c-487a-493f-a726-d380bde4795c
+    m_ActionName: Player/BrowseLeft[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 595b5101-2d04-409b-8014-a2b812da7fea
+    m_ActionName: Player/BrowseRight[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 15c67a51-5f57-46bc-ae60-76823f83a25e
+    m_ActionName: Player/StayInPlace[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -371,3 +385,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!81 &8389869830111492280
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4384501338375865715}
+  m_Enabled: 1
