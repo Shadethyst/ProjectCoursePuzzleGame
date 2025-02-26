@@ -6,11 +6,13 @@ public class SoundEffectPlayer : MonoBehaviour
 {
 
     public AudioSource soundEffect;
+    private float volume;
 
     // Start is called before the first frame update
     void Awake()
     {
         soundEffect = GetComponent<AudioSource>();
+        volume = soundEffect.volume;
     }
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class SoundEffectPlayer : MonoBehaviour
         else
         {
             soundEffect.mute = false;
-            soundEffect.volume = 1.0f;
+            soundEffect.volume = volume;
             soundEffect.Play();
         }
     }
