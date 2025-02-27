@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallTile : Tile
+public class DeepTile : Tile
 {
+    // Start is called before the first frame update
     void Start()
     {
         setStartStates();
@@ -12,7 +13,7 @@ public class WallTile : Tile
     {
         defaultWalkState = false;
         defaultPlacableState = false;
-        defaultFlowableState = false;
+        defaultFlowableState = true;
         base.setStartStates();
     }
 

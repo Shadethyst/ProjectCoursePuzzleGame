@@ -20,6 +20,7 @@ public class Mud : Item
     {
         base.placeItem(pos);
         GridManager.instance.getTileAtPos(pos).setWalkable(false);
+        GridManager.instance.getTileAtPos(pos).setPlacable(true);
     }
     public override void remove()
     {

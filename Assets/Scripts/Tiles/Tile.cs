@@ -52,11 +52,11 @@ public abstract class Tile : MonoBehaviour
 
         if(IsPlaceable())
         {
-            _highlight.GetComponent<SpriteRenderer>().color = Color.green;
+            _highlight.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0, 0.4f);
         }
         else
         {
-            _highlight.GetComponent<SpriteRenderer>().color = Color.white;
+            _highlight.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.4f);
         }
         _highlight.SetActive(true);
         
@@ -137,6 +137,22 @@ public abstract class Tile : MonoBehaviour
     public bool getWalkable()
     {
         return _isWalkable;
+    }
+    public void setFlowable(bool value)
+    {
+        _isFlowable = value;
+    }
+    public bool getFlowable()
+    {
+        return _isFlowable;
+    }
+    public void setPlacable(bool value)
+    {
+        _isPlacable = value;
+    }
+    public bool getPlacable()
+    {
+        return _isPlacable;
     }
     /*
      setters for default states of the tile,
