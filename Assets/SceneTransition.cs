@@ -23,6 +23,8 @@ public class SceneTransition : MonoBehaviour
         fadeImage.enabled = true;
         readyToBeginScene = true;
         readyToEndScene = false;
+
+        fadeCanvas.GetComponent<GraphicRaycaster>().enabled = false;
     }
 
     // Update is called once per frame
