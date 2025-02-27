@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MusicPlayer : MonoBehaviour
 {
+    public static MusicPlayer instance = null;
+
     [SerializeField] private AudioClip storyMusic;
     [SerializeField] private AudioClip gameplayMusic;
 
@@ -16,7 +18,15 @@ public class MusicPlayer : MonoBehaviour
     void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
-        DontDestroyOnLoad(this);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(base.gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -28,7 +38,7 @@ public class MusicPlayer : MonoBehaviour
         {
             if (audioSource.clip == gameplayMusic)
             {
-                FadeOutMusic();
+                FadeOutMusic(0.8f);
             }
 
             ChangeActiveClip(storyMusic);
@@ -38,16 +48,16 @@ public class MusicPlayer : MonoBehaviour
         {
             if (audioSource.clip == storyMusic)
             {
-                FadeOutMusic();
+                FadeOutMusic(0.4f);
             }
 
             ChangeActiveClip(gameplayMusic);
         }
     }
 
-    public void FadeOutMusic()
+    public void FadeOutMusic(float amountPerSecond)
     {
-        audioSource.volume -= 0.003f;
+        audioSource.volume -= amountPerSecond * Time.deltaTime;
     }
 
     public void ChangeActiveClip(AudioClip targetMusic)
