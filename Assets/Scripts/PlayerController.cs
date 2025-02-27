@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private InputAction browseRight;
     private InputAction interact;
     private InputAction stay;
+    private InputAction pickup;
 
     private GridManager gridManager;
     private GameManager gameManager;
@@ -72,6 +73,8 @@ public class PlayerController : MonoBehaviour
             browseLeft = playerInput.actions.FindAction("BrowseLeft");
             browseRight = playerInput.actions.FindAction("BrowseRight");
             stay = playerInput.actions.FindAction("StayInPlace");
+            pickup = playerInput.actions.FindAction("Pickup");
+
             instance = this;
             unit = GetComponent<Unit>();
             
@@ -249,6 +252,17 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+    }
+    public void handlePickup(InputAction.CallbackContext context)
+    {
+        if(context.performed && context.action.id == pickup.id && GameManager.Instance.state == GameState.WaitForInput && hoveredTile)
+        {
+            
+        }
+    }
+    public void findPickupTargets()
+    {
 
     }
     public void handleStayInPlace(InputAction.CallbackContext context)
