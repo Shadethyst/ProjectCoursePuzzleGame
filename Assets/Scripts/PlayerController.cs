@@ -119,6 +119,38 @@ public class PlayerController : MonoBehaviour
         {
             inventory[checkindex].count += amount;
         }
+        InventoryGUI.instance.SetImage(getChosenItem().item);
+        InventoryGUI.instance.SetCount(getChosenItem().count);
+    }
+    public void setItem(Item added, int amount)
+    {
+        bool inInventory = false;
+        int checkindex = 0;
+        foreach (InventoryItem I in inventory)
+        {
+            if (I.item == added)
+            {
+                inInventory = true;
+                break;
+            }
+            else
+            {
+                checkindex++;
+            }
+        }
+        if (!inInventory)
+        {
+            InventoryItem adding = new InventoryItem();
+            adding.item = added;
+            adding.count = amount;
+            inventory.Append(adding);
+        }
+        else
+        {
+            inventory[checkindex].count = amount;
+        }
+        InventoryGUI.instance.SetImage(getChosenItem().item);
+        InventoryGUI.instance.SetCount(getChosenItem().count);
     }
 
     // Start is called before the first frame update

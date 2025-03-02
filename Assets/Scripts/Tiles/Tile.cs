@@ -106,11 +106,13 @@ public abstract class Tile : MonoBehaviour
     {
         tilemap = GameObject.Find("Grid").transform.GetChild(0).GetComponent<Tilemap>();
         items = new bool[10];
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        GridManager.instance.setTileToDict(this);
         setStartStates();
     }
     protected virtual void setStartStates()
@@ -127,8 +129,8 @@ public abstract class Tile : MonoBehaviour
     }
     public Vector2 getCoords() 
     {
-        Vector3 position3D = tilemap.WorldToCell(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
-        return (Vector2)position3D;
+        Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y);
+        return position;
     }
     public void setWalkable(bool value)
     {

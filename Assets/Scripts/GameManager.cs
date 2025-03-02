@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private int interactionDone;
     private int interactors;
     private int storySceneNumber;
+    
 
     [SerializeField] private StoryManager storyManager;
     [SerializeField] private SceneTransition sceneTransition;
