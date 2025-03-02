@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -91,7 +92,34 @@ public class PlayerController : MonoBehaviour
     {
         return inventory[chosenItemIndex];
     }
-
+    public void addItem(Item added, int amount)
+    {
+        bool inInventory = false;
+        int checkindex = 0;
+        foreach(InventoryItem I in inventory)
+        {
+            if(I.item == added)
+            {
+                inInventory = true;
+                break;
+            }
+            else
+            {
+                checkindex++;
+            }
+        }
+        if (!inInventory)
+        {
+            InventoryItem adding = new InventoryItem();
+            adding.item = added;
+            adding.count = amount;
+            inventory.Append(adding);
+        }
+        else
+        {
+            inventory[checkindex].count += amount;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -203,7 +231,7 @@ public class PlayerController : MonoBehaviour
             bool inRange = (delta.x == 0 && Math.Abs(delta.y) <= getChosenItem().item.getRange())
                 || (delta.y == 0 && Math.Abs(delta.x) <= getChosenItem().item.getRange());
 
-            if (occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile && inRange)
+            if (occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile && inRange && hoveredTile.getPlacable())
             {
                 gameManager.UpdateGameState(GameState.Placement);
             }
