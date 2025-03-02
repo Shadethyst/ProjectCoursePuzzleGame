@@ -28,7 +28,10 @@ public class SoundEffectPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameManager.Instance.state == GameState.Story || GameManager.Instance.state == GameState.Pause)
+        {
+            soundEffect.mute = true;
+        }
     }
 
     public void PlaySoundEffect()
@@ -36,7 +39,7 @@ public class SoundEffectPlayer : MonoBehaviour
 
         readyToPlay = false;
 
-        if (GameManager.Instance.state == GameState.Story)
+        if (GameManager.Instance.state == GameState.Story || GameManager.Instance.state == GameState.Pause)
         {
             soundEffect.mute = true;
         }
@@ -52,7 +55,7 @@ public class SoundEffectPlayer : MonoBehaviour
                 soundEffect.loop = false;
                 readyToPlay = true; 
             }
-            else if (isPlayer && (playTimes % 2) == 0)
+            else if (isPlayer)
             {
                 soundEffect.loop = false;
                 readyToPlay = true;
