@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
             bool inRange = (delta.x == 0 && Math.Abs(delta.y) <= getChosenItem().item.getRange())
                 || (delta.y == 0 && Math.Abs(delta.x) <= getChosenItem().item.getRange());
 
-            if (occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile && inRange)
+            if (occupiedTile && GameManager.Instance.state == GameState.WaitForInput && hoveredTile && inRange && hoveredTile.getPlacable())
             {
                 gameManager.UpdateGameState(GameState.Placement);
             }
