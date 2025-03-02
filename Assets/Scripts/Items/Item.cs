@@ -15,8 +15,11 @@ public abstract class Item : MonoBehaviour
         AIR = 4,
         MUD = 5,
         BRICK = 6,
-        LEVEL_COMPLETE = 7,
-        STORY_ITEM = 8,
+        ROCK = 7,
+        ROCK_BURNING = 8,
+        ROCK_CRUMBLE = 9,
+        LEVEL_COMPLETE = 10,
+        STORY_ITEM = 11,
     }
 
     /// placement range for the Item, default range is 1
