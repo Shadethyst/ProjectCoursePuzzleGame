@@ -41,7 +41,7 @@ public class Fire : Item
             remove();
             GridManager.instance.getTileAtPos(this.transform.position).setDefaultWalkableState();
         }
-        if (other == Id.MUD)
+        if (other == Id.MUD || other == Id.ROCK)
         {
             remove();
         }

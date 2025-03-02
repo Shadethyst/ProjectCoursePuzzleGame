@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: RockPlacer
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 21300000, guid: a0afaeb1f7e24c44c869b8cbe232eef5, type: 3}
+  m_DefaultGameObject: {fileID: 4807730493122564499, guid: 13a729ca95952cf42942e94aef5eb873, type: 3}
+  m_DefaultColliderType: 1
+  m_TilingRules: []
