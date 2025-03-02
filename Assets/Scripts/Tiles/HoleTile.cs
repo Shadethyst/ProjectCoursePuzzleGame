@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class HoleTile : Tile
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        setStartStates();
-    }
 
     protected override void setStartStates()
     {

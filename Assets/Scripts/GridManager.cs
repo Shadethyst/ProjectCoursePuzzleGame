@@ -8,17 +8,20 @@ using UnityEngine.Tilemaps;
 public class GridManager : MonoBehaviour
 {
     public static GridManager instance;
-/*  [SerializeField] private int _height, _width;
-    [SerializeField] private Dictionary<Vector2, Tile> tiles; */
-    protected int variant;
-/*  [SerializeField] private Tile _tilePrefab;
-    [SerializeField] private Tile _tilePrefab2;
-    [SerializeField] private Tile _tilePrefab3;*/
+    /*  [SerializeField] private int _height, _width;*/
+
+        protected int variant;
+    /*  [SerializeField] private Tile _tilePrefab;
+        [SerializeField] private Tile _tilePrefab2;
+        [SerializeField] private Tile _tilePrefab3;*/
     [SerializeField] private Transform _camera;
     [SerializeField] private PlayerController _playerPrefab;
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private Dictionary<Vector2, Tile> tiles;
+    [SerializeField] List<Tilemap> LoadMaps;
     private GameObject player;
 
+    /*
     public Tile getTileAtPos(Vector2 pos)
     {
         if (tilemap.GetInstantiatedObject(tilemap.WorldToCell((pos)))){
@@ -28,6 +31,20 @@ public class GridManager : MonoBehaviour
             {
                 return checkedTile;
             }
+        }
+        return null;
+    }
+    */
+    public void setTileToDict(Tile tile)
+    {
+        tiles.Add(tile.gameObject.transform.position, tile);
+    }
+    public Tile getTileAtPos(Vector2 pos)
+    {
+        Tile tile = tiles[pos];
+        if (tile)
+        {
+            return tile;
         }
         return null;
     }
@@ -95,7 +112,12 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        this.tiles = new Dictionary<Vector2, Tile>();
         variant = 0;
+        /*
+        foreach (var map in LoadMaps) {
+            Instantiate(map);
+        }*/
         //_camera.transform.position = new Vector3((float)_width/2 - 0.5f, (float)_height/2 -0.5f, -10);
     }
     private void OnEnable()

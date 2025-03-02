@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GroundTile : Tile
 {
-    void Start()
-    {
-        setStartStates();
-    }
     protected override void setStartStates()
     {
         defaultWalkState = true;

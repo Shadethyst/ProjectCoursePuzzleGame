@@ -20,6 +20,7 @@ public abstract class Item : MonoBehaviour
         ROCK_CRUMBLE = 9,
         LEVEL_COMPLETE = 10,
         STORY_ITEM = 11,
+        ALEMBIC = 12,
     }
 
     /// placement range for the Item, default range is 1

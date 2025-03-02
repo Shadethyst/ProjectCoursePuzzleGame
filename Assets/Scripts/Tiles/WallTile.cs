@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class WallTile : Tile
 {
-    void Start()
-    {
-        setStartStates();
-    }
     protected override void setStartStates()
     {
         defaultWalkState = false;

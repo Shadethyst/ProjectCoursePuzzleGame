@@ -78,7 +78,7 @@ public class Water : Item
         {
             transformInto(transformElement);
         }
-        if(other == Id.FIRE || other == Id.ROCK || other == Id.ROCK_BURNING)
+        if(other == Id.FIRE || other == Id.ROCK || other == Id.ROCK_BURNING || other == Id.ALEMBIC)
         {
             remove();
         }
