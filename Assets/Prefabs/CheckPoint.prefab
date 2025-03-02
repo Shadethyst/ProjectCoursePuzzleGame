@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f7db0d8c3c9a5bf44b9278b0a768402f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1de6c053c471414e99f82b7ecea04d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,3 +149,4 @@ MonoBehaviour:
   - {fileID: 8698288125139584061, guid: 5673ac7a252e61b4c806d8092d8f4a31, type: 3}
   - {fileID: 4509801719194740260, guid: f9ceb704f5b84004398b706818a58cc7, type: 3}
   amounts: 00000000000000000000000000000000
+  ReloadedMaps: []
