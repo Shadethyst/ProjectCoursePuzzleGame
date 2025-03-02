@@ -162,6 +162,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("occupied: " + occupiedTile);
         CheckCurrentPosition();
         if(GameManager.Instance.state == GameState.Movement)
         {
