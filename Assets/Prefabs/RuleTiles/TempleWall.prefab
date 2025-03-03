@@ -55,6 +55,7 @@ MonoBehaviour:
   _isPlacable: 0
   _isFlowable: 0
   blockingItem: {fileID: 0}
+  items: 
 --- !u!212 &2695345748470577455
 SpriteRenderer:
   m_ObjectHideFlags: 0

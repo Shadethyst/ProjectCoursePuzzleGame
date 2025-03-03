@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (GameManager.Instance.state == GameState.LevelComplete)
+        if (GameManager.Instance.state == GameState.LevelComplete || GameManager.Instance.state == GameState.Defeat)
         {
             StartCoroutine(StopPlayerAnimation(1.0f));
         }
