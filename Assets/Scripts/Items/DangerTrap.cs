@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class DangerTrap : Item
 {
-    private Animator rockAnimator;
-
     private void Awake()
     {
         id = Id.DANGER_TRAP;
         range = 0;
         GameManager.Instance.changeInteractor(1);
-        rockAnimator = this.GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -42,13 +39,7 @@ public class DangerTrap : Item
         base.Interact(other);
         if (other == Id.FIRE)
         {
-            rockAnimator.SetBool("Burning", true);
-        }
-        if (other == Id.WATER && rockAnimator.GetBool("Burning") == true)
-        {
-            rockAnimator.SetBool("Crumbling", true);
-            Tile tile = GridManager.instance.getTileAtPos(this.transform.position);
-            tile.setWalkable(true);
+            this.remove();
         }
     }
 }

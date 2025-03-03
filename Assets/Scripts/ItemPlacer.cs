@@ -22,10 +22,6 @@ public class ItemPlacer : MonoBehaviour
         Debug.Log("position: " + GridManager.instance.getTileAtPos(gameObject.transform.position));
         if (GridManager.instance.getTileAtPos(gameObject.transform.position))
         {
-            Debug.Log("Placing item..." + placementItem);
-            bool tryGet = placementItem.GetComponent<Item>();
-            Debug.Log(placementItem + " caught? " + tryGet);
-            Debug.Log(placementItem + " " + placementItem.transform.position);
             placementItem.GetComponent<Item>().placeItem(gameObject.transform.position);
             gameObject.SetActive(false);
         }

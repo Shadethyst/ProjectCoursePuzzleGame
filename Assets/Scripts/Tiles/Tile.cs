@@ -24,7 +24,7 @@ public abstract class Tile : MonoBehaviour
 
     public Item blockingItem;
     
-    private bool[] items;
+    [SerializeField] private bool[] items;
     
     protected Vector2 Coords;
 
@@ -105,7 +105,7 @@ public abstract class Tile : MonoBehaviour
     private void Awake()
     {
         tilemap = GameObject.Find("Grid").transform.GetChild(0).GetComponent<Tilemap>();
-        items = new bool[10];
+        items = new bool[15];
 
     }
 
