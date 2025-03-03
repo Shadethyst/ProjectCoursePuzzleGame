@@ -162,6 +162,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("occupied: " + occupiedTile);
         CheckCurrentPosition();
         if(GameManager.Instance.state == GameState.Movement)
         {
@@ -177,7 +178,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (GameManager.Instance.state == GameState.LevelComplete)
+        if (GameManager.Instance.state == GameState.LevelComplete || GameManager.Instance.state == GameState.Defeat)
         {
             StartCoroutine(StopPlayerAnimation(1.0f));
         }

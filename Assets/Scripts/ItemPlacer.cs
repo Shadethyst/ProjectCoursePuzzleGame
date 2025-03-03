@@ -19,6 +19,7 @@ public class ItemPlacer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("position: " + GridManager.instance.getTileAtPos(gameObject.transform.position));
         if (GridManager.instance.getTileAtPos(gameObject.transform.position))
         {
             placementItem.GetComponent<Item>().placeItem(gameObject.transform.position);
