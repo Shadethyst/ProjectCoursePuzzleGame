@@ -63,7 +63,7 @@ public class DangerTrap : Item
     private void moveInDir(Vector2 dir)
     {
         nextTile = GridManager.instance.getTileAtPos((Vector2)gameObject.transform.position - dir);
-        if (nextTile && nextTile.Walkable)
+        if (nextTile && nextTile.Walkable || (nextTile && nextTile.getItem(Id.FIRE)) || (nextTile && nextTile.getItem(Id.MUD)))
         {
             GridManager.instance.getTileAtPos(this.transform.position).setWalkable(true);
             GridManager.instance.getTileAtPos(this.transform.position).removeItem(id);
