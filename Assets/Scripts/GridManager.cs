@@ -41,12 +41,7 @@ public class GridManager : MonoBehaviour
     }
     public Tile getTileAtPos(Vector2 pos)
     {
-        Tile tile = tiles[pos];
-        if (tile)
-        {
-            return tile;
-        }
-        return null;
+        return tiles[pos];
     }
 
     public void generatePuzzle(int variant)
