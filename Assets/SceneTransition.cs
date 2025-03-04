@@ -38,8 +38,16 @@ public class SceneTransition : MonoBehaviour
 
         if (readyToEndScene)
         {
-            fadeImage.CrossFadeAlpha(1.0f, 0.4f, false);
-            StartCoroutine(ChangeScene());
+            if (GameManager.Instance.state == GameState.LevelComplete)
+            {
+                fadeImage.CrossFadeAlpha(1.0f, 0.5f, false);
+                StartCoroutine(ChangeScene());
+            }
+            else
+            {
+                fadeImage.CrossFadeAlpha(1.0f, 1.0f, false);
+                readyToEndScene = false;
+            }
         }
     }
 

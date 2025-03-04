@@ -230,12 +230,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6656048496068219928}
   _highlight: {fileID: 1947118413954747988}
-  _isWalkable: 0
-  _isPlacable: 0
-  _isAdjacent: 0
-  _isFlowable: 0
-  _adjacentMaterial: {fileID: 0}
-  _nonAdjacentMaterial: {fileID: 0}
   occupiedUnit: {fileID: 0}
   tilemap: {fileID: 0}
+  _isWalkable: 0
+  _isPlacable: 0
+  _isFlowable: 0
   blockingItem: {fileID: 0}
+  items: 

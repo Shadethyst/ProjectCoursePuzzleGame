@@ -116,6 +116,25 @@ public class PauseMenu : MonoBehaviour
         return this.isPaused;
     }
 
+
+    public void RestartFromCheckpoint()
+    {
+        GameObject dataSaver = GameObject.Find("DataSaver");
+
+        if (dataSaver)
+        {
+            if (dataSaver.GetComponent<DataSaver>().GetIncarnation() > 0)
+            {
+                dataSaver.gameObject.GetComponent<DataSaver>().Restart();
+                Resume();
+            }
+            else
+            {
+                ResetLevel();
+            }
+        }
+    }
+
     public void ResetLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

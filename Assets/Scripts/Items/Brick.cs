@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Brick : Item
@@ -34,5 +35,17 @@ public class Brick : Item
     public override void Interact(Id other)
     {
         base.Interact(other);
+        if (other == Id.FIRE)
+        {
+            remove();
+        }
+        if (other == Id.EARTH)
+        {
+            remove();
+        }
+        if (other == Id.WATER)
+        {
+            GridManager.instance.getTileAtPos(gameObject.transform.position).setWalkable(true);
+        }
     }
 }

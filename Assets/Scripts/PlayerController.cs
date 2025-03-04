@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] protected int chosenItemIndex = 0;
     [SerializeField] protected InventoryItem[] inventory;
+    [SerializeField] private GameObject dataSaver;
 
     private PlayerInput playerInput;
     private Animator playerAnimator;
@@ -53,8 +54,9 @@ public class PlayerController : MonoBehaviour
     private bool inputGiven;
     private float distance = 1.0f;
     private float speed = 2.0f;
-    
 
+    private bool restartActivated;
+    
     private void Awake()
     {
         try
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour
             browseRight = playerInput.actions.FindAction("BrowseRight");
             stay = playerInput.actions.FindAction("StayInPlace");
             pickup = playerInput.actions.FindAction("Pickup");
+            restartActivated = false;
 
             instance = this;
             unit = GetComponent<Unit>();
@@ -178,11 +181,24 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (GameManager.Instance.state == GameState.LevelComplete || GameManager.Instance.state == GameState.Defeat)
+        if (GameManager.Instance.state == GameState.LevelComplete)
         {
             StartCoroutine(StopPlayerAnimation(1.0f));
         }
 
+        if (GameManager.Instance.state == GameState.Defeat)
+        {
+            StartCoroutine(StopPlayerAnimation(0.02f));
+            if (restartActivated == false)
+            {
+                restartActivated = true;
+                dataSaver.GetComponent<DataSaver>().Restart();
+            }
+        }
+        else
+        {
+            restartActivated = false;
+        }
 
     }
 
