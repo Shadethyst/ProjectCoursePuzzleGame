@@ -88,7 +88,7 @@ public class PauseMenu : MonoBehaviour
     public void CloseSettings()
     {
         pauseMenuBase.SetActive(true);
-        pauseMenuButtons[3].Select();
+        pauseMenuButtons[4].Select();
         settingsBase.SetActive(false);
     }
 

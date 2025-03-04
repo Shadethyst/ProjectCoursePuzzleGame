@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,11 @@ public class mainMenu : MonoBehaviour
 {
 
     [SerializeField] private GameObject mainMenuBase;
+    [SerializeField] private GameObject levelSelectBase;
     [SerializeField] private GameObject settingsBase;
 
     [SerializeField] private Button[] mainMenuButtons;
+    [SerializeField] private Button[] levelSelectButtons;
     [SerializeField] private Button[] settingsButtons;
 
     [SerializeField] private Image gameStartFadeScreen;
@@ -40,6 +43,25 @@ public class mainMenu : MonoBehaviour
         readyToChangeScenes = true;
     }
 
+    public void OpenLevelSelect()
+    {
+        levelSelectBase.SetActive(true);
+        levelSelectButtons[0].Select();
+        mainMenuBase.SetActive(false);
+    }
+
+    public void CloseLevelSelect()
+    {
+        mainMenuBase.SetActive(true);
+        mainMenuButtons[2].Select();
+        levelSelectBase.SetActive(false);
+    }
+
+    public void OpenLevel(int i)
+    {
+        SceneManager.LoadScene(i);
+    }
+
     public void OpenSettings()
     {
         settingsBase.SetActive(true);
@@ -50,7 +72,7 @@ public class mainMenu : MonoBehaviour
     public void CloseSettings()
     {
         mainMenuBase.SetActive(true);
-        mainMenuButtons[2].Select();
+        mainMenuButtons[3].Select();
         settingsBase.SetActive(false);
     }
 
