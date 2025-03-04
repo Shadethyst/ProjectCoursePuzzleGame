@@ -7,7 +7,8 @@ using UnityEngine.Tilemaps;
 public class CheckPoint : MonoBehaviour
 {
     private Boolean passed;
-    [SerializeField] int checkPointId;
+    [SerializeField] private int checkPointId;
+    [SerializeField] private GameObject dataSaver;
     [SerializeField] List<Item> items;
     [SerializeField] List<int> amounts;
     [SerializeField] List<Tilemap> ReloadedMaps;
@@ -23,37 +24,24 @@ public class CheckPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("collided with an object");
-        if(collision.gameObject.tag == "Player" && !passed)
+        if (collision.gameObject.tag == "Player" && !passed)
         {
             Debug.Log("player passed");
             passed = true;
-            foreach (Item item in items)
-            {
-               collision.gameObject.GetComponent<PlayerController>().setItem(item, amounts[items.IndexOf(item)]);
-            }
 
-            environmentItems = GameObject.FindGameObjectsWithTag("Item");
-            foreach (GameObject environmentItem in environmentItems)
-            {
-                Destroy(environmentItem);
-                Instantiate(environmentItem);
-            }
+            dataSaver.GetComponent<DataSaver>().AddItems(items, amounts);
+            dataSaver.GetComponent<DataSaver>().SetRespawnPosition(this.transform.position);
+
         }
     }
-
-  /*  public IEnumerator ReloadMap()
+    public GameObject GetActiveTilemap()
     {
-        yield return new WaitForSeconds(2f);
-        Transform[] itemPlacers = tilemap.transform.GetChild(0).GetChild(0).GetComponentsInChildren<Transform>();
-        Debug.Log("ItemPlacers: " + itemPlacers);
-        foreach (Transform itemPlacer in itemPlacers)
-        {
-            itemPlacer.gameObject.GetComponent<ItemPlacer>().ReloadItems();
-        }
-    }*/
+        return tilemap.gameObject;
+    }
 }
+

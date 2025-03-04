@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chosenItemIndex: 0
   inventory: []
+  dataSaver: {fileID: 7785746432656520863, guid: 994577ff29b0d344ca44a775dbfc8481, type: 3}
 --- !u!114 &-8911653786418350011
 MonoBehaviour:
   m_ObjectHideFlags: 0

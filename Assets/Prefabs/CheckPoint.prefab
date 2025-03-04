@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ebba5f3ce10cd4e928bf2a257b3b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkPointId: 0
+  dataSaver: {fileID: 7785746432656520863, guid: 994577ff29b0d344ca44a775dbfc8481, type: 3}
   items:
   - {fileID: -9204530288677546467, guid: 6bc294907d45f954dbe878fd4007ded7, type: 3}
   - {fileID: 7874511235081064800, guid: b5451a3d9a2820b49abd5e19f8ee1410, type: 3}
@@ -150,3 +152,5 @@ MonoBehaviour:
   - {fileID: 4509801719194740260, guid: f9ceb704f5b84004398b706818a58cc7, type: 3}
   amounts: 00000000000000000000000000000000
   ReloadedMaps: []
+  tilemap: {fileID: 0}
+  grid: {fileID: 0}
