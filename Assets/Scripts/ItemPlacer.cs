@@ -26,4 +26,14 @@ public class ItemPlacer : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    public void ReloadItems()
+    {
+        Debug.Log("Reloading items");
+        gameObject.SetActive(true);
+        if (GridManager.instance.getTileAtPos(gameObject.transform.position))
+        {
+            Debug.Log("Placing items...");
+            placementItem.GetComponent<Item>().placeItem(gameObject.transform.position);
+        }
+    }
 }
