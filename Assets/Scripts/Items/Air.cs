@@ -25,6 +25,11 @@ public class Air : Item
     }
     public override void Interact(Id other)
     {
+        if(other == Id.FIRE)
+        {
+            // Fire.Interact will handle fire spreading
+            remove();
+        }
         base.Interact(other);
     }
 }

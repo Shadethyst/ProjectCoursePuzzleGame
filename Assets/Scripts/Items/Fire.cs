@@ -39,11 +39,22 @@ public class Fire : Item
         if(other == Id.WATER || other == Id.EARTH)
         {
             remove();
-            GridManager.instance.getTileAtPos(this.transform.position).setDefaultWalkableState();
+            GridManager.instance.getTileAtPos(transform.position).setDefaultWalkableState();
         }
         if (other == Id.MUD || other == Id.ROCK)
         {
             remove();
+        }
+        if (other == Id.AIR)
+        {
+            // Air spreads fire
+            var delta = transform.position - PlayerController.instance.transform.position;
+            var nextPos = (Vector2)(transform.position + delta);
+
+            if ((bool)GridManager.instance.getTileAtPos(nextPos)?.Flowable)
+            {
+                placeItem(nextPos);
+            }
         }
     }
     public void transformInto(Item change)
