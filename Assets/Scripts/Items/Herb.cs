@@ -9,6 +9,7 @@ public class Herb : Item
         if(collision.gameObject.tag == "player")
         {
             PlayerController.instance.addItem(this, 1);
+            remove();
         }
     }
 }
