@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class FragileTile : Tile
 {
-    [SerializeField] GameObject brokenVisual;
-    [SerializeField] GameObject baseVisual;
+    private GameObject baseVisual;
+    private GameObject brokenVisual;
     protected override void setStartStates()
     {
         defaultWalkState = true;
         defaultPlacableState = false;
         defaultFlowableState = false;
         base.setStartStates();
+
+        baseVisual = this.transform.GetChild(1).gameObject;
+        brokenVisual = this.transform.GetChild(2).gameObject;
+        baseVisual.SetActive(true);
+        brokenVisual.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,7 +25,6 @@ public class FragileTile : Tile
             this.setWalkable(false);
             baseVisual.SetActive(false);
             brokenVisual.SetActive(true);
-
         }   
     }
 
