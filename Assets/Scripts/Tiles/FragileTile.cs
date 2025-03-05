@@ -23,14 +23,19 @@ public class FragileTile : Tile
         if(other.gameObject.tag == "Player")
         {
             this.setWalkable(false);
-            baseVisual.SetActive(false);
             brokenVisual.SetActive(true);
+            baseVisual.SetActive(false);
         }   
     }
 
-    // Update is called once per frame
+   /* // Update is called once per frame
     void Update()
     {
-        
-    }
+        if (this.transform.position == PlayerController.instance.transform.position)
+        {
+            this.setWalkable(false);
+            brokenVisual.SetActive(true);
+            baseVisual.SetActive(false);
+        }
+    }*/
 }

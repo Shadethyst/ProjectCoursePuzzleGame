@@ -27,7 +27,7 @@ public class DataSaver : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(respawnPosition);
+
     }
 
 
