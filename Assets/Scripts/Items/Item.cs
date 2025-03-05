@@ -22,6 +22,7 @@ public abstract class Item : MonoBehaviour
         STORY_ITEM = 11,
         ALEMBIC = 12,
         DANGER_TRAP = 13,
+        FIRE_PUZZLE = 14,
     }
 
     /// placement range for the Item, default range is 1

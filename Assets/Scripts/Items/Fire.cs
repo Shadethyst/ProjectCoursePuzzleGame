@@ -41,7 +41,7 @@ public class Fire : Item
             remove();
             GridManager.instance.getTileAtPos(transform.position).setDefaultWalkableState();
         }
-        if (other == Id.MUD || other == Id.ROCK)
+        if (other == Id.MUD || other == Id.ROCK || other == Id.FIRE_PUZZLE)
         {
             remove();
         }
@@ -50,10 +50,15 @@ public class Fire : Item
             // Air spreads fire
             var delta = transform.position - PlayerController.instance.transform.position;
             var nextPos = (Vector2)(transform.position + delta);
+            var secondNextPos = (Vector2)(transform.position + delta * 2);
 
             if ((bool)GridManager.instance.getTileAtPos(nextPos)?.Flowable)
             {
                 placeItem(nextPos);
+                if ((bool)GridManager.instance.getTileAtPos(secondNextPos)?.Flowable)
+                {
+                    placeItem(secondNextPos);
+                }
             }
         }
     }
