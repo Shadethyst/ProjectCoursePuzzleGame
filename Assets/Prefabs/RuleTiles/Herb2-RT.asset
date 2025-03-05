@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: FragileTile-RT
+  m_Name: Herb2-RT
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 3962048713745714827, guid: e0ea33ad0874ed5499fef99341ffec2f, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: c3c41500c3f09a145aff48d3d6af59e4, type: 3}
+  m_DefaultGameObject: {fileID: 8663030456985219584, guid: d0253b18b21fba54e8dbcc74605fee97, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

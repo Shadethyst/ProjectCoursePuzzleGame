@@ -105,7 +105,7 @@ public abstract class Tile : MonoBehaviour
     private void Awake()
     {
         tilemap = GameObject.Find("Grid").transform.GetChild(0).GetComponent<Tilemap>();
-        items = new bool[15];
+        items = new bool[16];
 
     }
 

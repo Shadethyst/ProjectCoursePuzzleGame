@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     private float distance = 1.0f;
     private float speed = 2.0f;
 
+    private int ambrosiaItems;
+
     private bool restartActivated;
     
     private void Awake()
@@ -84,6 +86,8 @@ public class PlayerController : MonoBehaviour
             
             InventoryGUI.instance.SetImage(getChosenItem().item);
             InventoryGUI.instance.SetCount(getChosenItem().count);
+
+            ambrosiaItems = 0;
         } 
         catch
         {
@@ -165,6 +169,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Ambrosia items: " + ambrosiaItems);
+
         Debug.Log("occupied: " + occupiedTile);
         CheckCurrentPosition();
         if(GameManager.Instance.state == GameState.Movement)
@@ -369,6 +375,15 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.UpdateGameState(GameState.WaitForInput);
         }
+    }
+
+    public void SetAmbrosiaItems()
+    {
+        this.ambrosiaItems += 1;
+    }
+    public int GetAmbrosiaItems()
+    {
+        return ambrosiaItems;
     }
     public Tile getHoveredTile() { return hoveredTile; }
     public void setHoveredTile(Tile tile) {  hoveredTile = tile; }
