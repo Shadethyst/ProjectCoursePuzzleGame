@@ -18,7 +18,6 @@ public class PuzzleDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Checking puzzles");
         foreach(GameObject firePuzzle in firePuzzles)
         {
             if (!firePuzzle.GetComponent<FirePuzzle>().GetIsActivated())
@@ -34,12 +33,17 @@ public class PuzzleDoor : MonoBehaviour
         if (puzzlesCompleted >= firePuzzles.Length)
         {
             open = true;
-            GridManager.instance.getTileAtPos(this.transform.position).setWalkable(true);
         }
 
         if (open)
         {
             this.GetComponent<SpriteRenderer>().enabled = false;
+            GridManager.instance.getTileAtPos(this.transform.position).setWalkable(true);
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().enabled = true;
+            GridManager.instance.getTileAtPos(this.transform.position).setWalkable(false);
         }
     }
 }
