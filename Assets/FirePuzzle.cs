@@ -19,7 +19,13 @@ public class FirePuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GridManager.instance.getTileAtPos(this.transform.position).getItem(Item.Id.FIRE))
+        if (GameManager.Instance.state == GameState.Defeat)
+        {
+            this.activated = false;
+            this.GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        if (GameManager.Instance.state != GameState.Defeat && GridManager.instance.getTileAtPos(this.transform.position).getItem(Item.Id.FIRE))
         {
             this.activated = true;
             this.GetComponent<SpriteRenderer>().enabled = false;
