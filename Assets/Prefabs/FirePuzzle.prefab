@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4492913258816184792}
   - component: {fileID: 6950832862772904319}
   - component: {fileID: -6792993753194999525}
-  - component: {fileID: 2897691989647221058}
-  m_Layer: 6
-  m_Name: Danger
-  m_TagString: Item
+  - component: {fileID: 2595007661384234236}
+  m_Layer: 0
+  m_Name: FirePuzzle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,8 +119,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: ffa24c80b36992c4cb53f752dc1e094c, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: 36992013e49652e4a9972fcd15d2f4bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -131,7 +131,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2897691989647221058
+--- !u!114 &2595007661384234236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,8 +140,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8781055872010965776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e4144f2177b11645ad07cc2a25eabf0, type: 3}
+  m_Script: {fileID: 11500000, guid: de5966ef899e94b47b826dca430f3a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 1
-  id: 13

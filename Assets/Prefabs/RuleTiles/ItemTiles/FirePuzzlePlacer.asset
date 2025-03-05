@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: DangerTrapRT
+  m_Name: FirePuzzlePlacer
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: ffa24c80b36992c4cb53f752dc1e094c, type: 3}
-  m_DefaultGameObject: {fileID: 2558021756936373489, guid: 9761c1e637e82a6438798505ab4d0f0f, type: 3}
+  m_DefaultSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_DefaultGameObject: {fileID: 2558021756936373489, guid: 0897784ee2dedd2498070d0bc820c5c6, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []
