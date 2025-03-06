@@ -169,7 +169,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Ambrosia items: " + ambrosiaItems);
+
+        Debug.Log("Ambrosia items: " + GetAmbrosiaItems());
+        if (GetAmbrosiaItems() >= 3)
+        {
+            gameManager.UpdateGameState(GameState.LevelComplete);
+        }
 
         Debug.Log("occupied: " + occupiedTile);
         CheckCurrentPosition();

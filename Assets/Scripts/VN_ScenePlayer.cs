@@ -60,7 +60,12 @@ public class VisualNovelPlayer : MonoBehaviour
             SceneManager.LoadScene(2);
         }
 
-        else if (completed && SceneManager.GetActiveScene().name != "Story_Intro")
+        if (completed && SceneManager.GetActiveScene().name == "FinalStory")
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        else if (completed && SceneManager.GetActiveScene().name != "Story_Intro" && SceneManager.GetActiveScene().name != "FinalStory")
         {
             this.gameObject.SetActive(false);
             InventoryGUI.instance.gameObject.SetActive(true);

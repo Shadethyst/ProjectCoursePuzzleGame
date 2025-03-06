@@ -23,6 +23,7 @@ public class LevelComplete : Item
     {
         if (this.transform.position == PlayerController.instance.transform.position)
         {
+            Debug.Log("Level Complete");
             GameManager.Instance.UpdateGameState(GameState.LevelComplete);
         }
     }
