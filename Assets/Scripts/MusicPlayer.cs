@@ -34,7 +34,7 @@ public class MusicPlayer : MonoBehaviour
     {
         sceneNumber = SceneManager.GetActiveScene().buildIndex;
 
-        if (sceneNumber < 2)
+        if (sceneNumber < 2 || sceneNumber > 4)
         {
             if (audioSource.clip == gameplayMusic)
             {
@@ -44,7 +44,7 @@ public class MusicPlayer : MonoBehaviour
             ChangeActiveClip(storyMusic);
             
         }
-        else if (sceneNumber > 1)
+        else if (sceneNumber > 1 && sceneNumber < 5)
         {
             if (audioSource.clip == storyMusic)
             {

@@ -109,7 +109,7 @@ public class DangerTrap : Item
 
     public void CheckForDamage()
     {
-        Collider2D colliders = Physics2D.OverlapCircle(transform.position, 0.2f);
+        Collider2D colliders = Physics2D.OverlapCircle(transform.position, 0.3f);
         if (colliders == PlayerController.instance.gameObject.GetComponent<Collider2D>() || this.transform.position == PlayerController.instance.transform.position)
         {
             GameManager.Instance.UpdateGameState(GameState.Defeat);
